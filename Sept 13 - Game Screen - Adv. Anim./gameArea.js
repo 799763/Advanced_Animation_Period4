@@ -1,9 +1,9 @@
 function GameArea(){
    //  Wrapper Div
+   this.tileMenuDiv = document.createElement("tileDiv");
    this.wrapperDiv = document.getElementById("wrapperDiv");
    this.wrapperDiv.setAttribute("style","background-color:yellow; border: 5px solid black; width:900px; height:800px;");
    // create tileMenuDiv
-   this.tileMenuDiv = document.createElement("tileDiv");
    this.tileMenuDiv.setAttribute("style","background-color:#033c4a; width:900px; height:100px; float:left;");
    this.wrapperDiv.appendChild(this.tileDiv);
    this.tiles = [];
