@@ -47,29 +47,29 @@ JSVector.prototype.sub = function(v2){
 //////
 // Class method to return a new vector that is the sum of two vectors
 JSVector.addGetNew = function(v1,v2){
-    v3.x = v1.x + v2.x;
-    v3.y = v1.y + v2.y;
-    return(v3);
+    return(new JSVector(v1.x + v2.x, v1.y + v2.y));
 }
 
 // Class method to return a new vector that is the difference of two vectors
 JSVector.subGetNew = function(v1,v2){
-
+  return(new JSVector(v1.x - v2.x, v1.y - v2.y));
 }
 
 // Multiply this vector by a scalar
 JSVector.prototype.multiply = function(scalar){
-
+  this.x = this.x * scalar;
+  this.y = this.y * scalar;
 }
 
 // Divide this vector by a scalar
 JSVector.prototype.divide = function(scalar){
-
+  this.x = this.x / scalar;
+  this.y = this.y / scalar;
 }
 
 // Normalize this vector so that it has a magnitude of 1
 JSVector.prototype.normalize = function(){
-
+  this.setMagnitude(1);
 }
 
 // Limit the magnitude of this vector
@@ -79,12 +79,12 @@ JSVector.prototype.limit = function(lim){
 
 // Get the distance between this vector and another one
 JSVector.prototype.distance = function(v2){
-
+  return ((v2.x + this.x) * (v2.x + this.x) + (v2.y + this.y) * (v2.y + this.y));
 }
 
 // Get square of the distance between this vector and another one
 JSVector.prototype.distanceSquared = function(v2){
-
+  return Math.sqrt((v2.x + this.x) * (v2.x + this.x) + (v2.y + this.y) * (v2.y + this.y));
 }
 
 // Rotate this vector by some number of radians
@@ -102,7 +102,7 @@ JSVector.prototype.angleBetween = function(v2){
 
 // Make a copy of this vector
 JSVector.prototype.copy = function(){
-
+  
 }
 
 // Override inherited toString() to describe this instance
