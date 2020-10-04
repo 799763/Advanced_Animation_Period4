@@ -1,6 +1,7 @@
 //  Bubble constructor function +++++++++++++++++++++++++++++
 function Bubble(x, y, dx, dy, rad, clr){
     this.loc = new JSVector(x, y);
+    this.vel = new JSVector(dx, dy);
     // this.x = x;
     // this.y = y;
     this.dx = dx;
@@ -25,7 +26,8 @@ Bubble.prototype.checkOverlapping = function(){
     let b = game.bubbles;
     for(let i = 0; i < b.length; i++){ // for all the bubbles
        if(this !== b[i]){   // if not this bubble
-         let d = Math.sqrt((this.loc..x-b[i].x)*(this.loc.x-b[i].x) + (this.loc.y-b[i].y)*(this.loc.y-b[i].y));
+         //let d = Math.sqrt((this.x-b[i].x)*(this.x-b[i].x) + (this.y-b[i].y)*(this.y-b[i].y));
+         let d = this.loc.distance(b[i].loc);
          if(d < this.rad + b[i].rad){
             this.isOverlapping = true;
             this.clr =  "rgba(100,220,55,10)"
@@ -54,17 +56,35 @@ Bubble.prototype.render = function(){
     }
 
   }
+//+++++++++++++++++++++++++++++++++++++++++++++++
 
 // Move the bubble in a random direction
-Bubble.prototype.update = function(){
-    if(!game.gamePaused){
-      this.dx = Math.random()*6-3;
-      this.dy = Math.random()*6-3;
-      this.loc.x += this.dx;
-      this.loc.y += this.dy;
-    }
-  }
+// Bubble.prototype.update = function(){
+//     if(!game.gamePaused){
+//       this.vel.dx = Math.random()*6-3;
+//       this.vel.dy = Math.random()*6-3;
+//       this.loc.add(this.vel);
+//     }
+//   }
 
+//+++++++++++++++++++++++++++++++++++++++++++++++
+
+//Attraction update function
+Bubble.prototype.update = function(){
+    let Bub = game.bubbles;
+    if(this != Bub[0]){
+        let d = this.loc.distance(b[0].loc);
+        if(d < 300){
+            this.acc = JSVector.subGetNew(this.loc, b[0].loc);
+            this.acc.normalize();
+            this.acc.multiply(0.5);
+        }
+    }
+    this.vel.add(this.acc);
+    this.loc.add(this.vel);
+}
+
+//+++++++++++++++++++++++++++++++++++++++++++++++
 // When a bubble hits an edge of the canvas, it wraps around to the opposite edge.
 Bubble.prototype.checkEdges = function(){
     let canvas = game.canvas;

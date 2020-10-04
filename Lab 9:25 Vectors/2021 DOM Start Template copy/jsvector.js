@@ -97,12 +97,14 @@ JSVector.prototype.rotate = function(angle) {
 
 // Get the angle between this vector and another one
 JSVector.prototype.angleBetween = function(v2){
-
+  var mag = this.getMagnitude();
+  var mag2 = this.getMagnitude(v2);
+  return(Math.cos( (mag * mag2)/(|mag| * |mag2|) );
 }
 
 // Make a copy of this vector
 JSVector.prototype.copy = function(){
-  return (new JSVector());
+  return (new JSVector(this.x, this.y));
 }
 
 // Override inherited toString() to describe this instance
