@@ -56,33 +56,34 @@ Bubble.prototype.render = function(){
     }
 
   }
+//Bubbles update function
 //+++++++++++++++++++++++++++++++++++++++++++++++
 
-// Move the bubble in a random direction
-// Bubble.prototype.update = function(){
-//     if(!game.gamePaused){
-//       this.vel.dx = Math.random()*6-3;
-//       this.vel.dy = Math.random()*6-3;
-//       this.loc.add(this.vel);
-//     }
-//   }
+Move the bubble in a random direction
+Bubble.prototype.update = function(){
+    if(!game.gamePaused){
+      this.vel.dx = Math.random()*6-3;
+      this.vel.dy = Math.random()*6-3;
+      this.loc.add(this.vel);
+    }
+  }
 
 //+++++++++++++++++++++++++++++++++++++++++++++++
 
 //Attraction update function
-Bubble.prototype.update = function(){
-    let Bub = game.bubbles;
-    if(this != Bub[0]){
-        let d = this.loc.distance(b[0].loc);
-        if(d < 300){
-            this.acc = JSVector.subGetNew(this.loc, b[0].loc);
-            this.acc.normalize();
-            this.acc.multiply(0.5);
-        }
-    }
-    this.vel.add(this.acc);
-    this.loc.add(this.vel);
-}
+// Bubble.prototype.update = function(){
+//     let Bub = game.bubbles;
+//     if(this != Bub[0]){
+//         let d = this.loc.distance(b[0].loc);
+//         if(d < 300){
+//             this.acc = JSVector.subGetNew(this.loc, b[0].loc);
+//             this.acc.normalize();
+//             this.acc.multiply(0.5);
+//         }
+//     }
+//     this.vel.add(this.acc);
+//     this.loc.add(this.vel);
+// }
 
 //+++++++++++++++++++++++++++++++++++++++++++++++
 // When a bubble hits an edge of the canvas, it wraps around to the opposite edge.

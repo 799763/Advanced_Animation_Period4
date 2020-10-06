@@ -74,7 +74,10 @@ JSVector.prototype.normalize = function(){
 
 // Limit the magnitude of this vector
 JSVector.prototype.limit = function(lim){
-
+  this.mag = this.getMagnitude();
+  if(mag > lim){
+    mag = lim;;
+  }
 }
 
 // Get the distance between this vector and another one
@@ -92,7 +95,9 @@ JSVector.prototype.distanceSquared = function(v2){
 //                           |  sin   +cos  |
 
 JSVector.prototype.rotate = function(angle) {
-
+    this.mag = this.getMagnitude();
+    this.x = this.getDirection();
+    
 }
 
 // Get the angle between this vector and another one
