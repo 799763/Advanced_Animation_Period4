@@ -41,18 +41,34 @@ Bubble.prototype.checkOverlapping = function(){
 Bubble.prototype.render = function(){
     let ctx = game.ctx;
     // color depends on whether this bubble overlaps any oher bubble
-    if(this.isOverlapping){
-        ctx.strokeStyle = "rgba(255,255,255,255)"//this.clr;
-        ctx.fillStyle = this.clr;
-        ctx.beginPath();
-        ctx.arc(this.loc.x,this.loc.y, this.rad, Math.PI*2, 0, false);
-        ctx.stroke();
-        ctx.fill();
+    // if(this.isOverlapping){
+    //     ctx.strokeStyle = "rgba(255,255,255,255)"//this.clr;
+    //     ctx.fillStyle = this.clr;
+    //     ctx.beginPath();
+    //     ctx.arc(this.loc.x,this.loc.y, this.rad, Math.PI*2, 0, false);
+    //     ctx.stroke();
+    //     ctx.fill();
+    // }else{
+    //     ctx.strokeStyle = this.clr;
+    //     ctx.beginPath();
+    //     ctx.arc(this.loc.x,this.loc.y, this.rad, Math.PI*2, 0, false);
+    //     ctx.stroke();
+    // }
+    let Bub = game.bubbles;
+    if(this == Bub[0]){
+          ctx.fillStyle = "red";
+          ctx.strokeStyle = "rgba(255,255,255,255)"//this.clr;
+          ctx.beginPath();
+          ctx.arc(this.loc.x,this.loc.y, this.rad, Math.PI*2, 0, false);
+          ctx.stroke();
+          ctx.fill();
     }else{
-        ctx.strokeStyle = this.clr;
-        ctx.beginPath();
-        ctx.arc(this.loc.x,this.loc.y, this.rad, Math.PI*2, 0, false);
-        ctx.stroke();
+      ctx.fillStyle = "white";
+          ctx.strokeStyle = "rgba(255,255,255,255)"//this.clr;
+          ctx.beginPath();
+          ctx.arc(this.loc.x,this.loc.y, this.rad, Math.PI*2, 0, false);
+          ctx.stroke();
+          ctx.fill();
     }
 
   }
@@ -73,10 +89,11 @@ Bubble.prototype.render = function(){
 //Attraction update function
 Bubble.prototype.update = function(){
     let Bub = game.bubbles;
+    this.acc = new JSVector(0, 0);
     if(this != Bub[0]){
-        let d = this.loc.distance(b[0].loc);
+        let d = this.loc.distance(Bub[0].loc);
         if(d < 300){
-            this.acc = JSVector.subGetNew(this.loc, b[0].loc);
+            this.acc = JSVector.subGetNew(this.loc, Bub[0].loc);
             this.acc.normalize();
             this.acc.multiply(0.5);
         }
