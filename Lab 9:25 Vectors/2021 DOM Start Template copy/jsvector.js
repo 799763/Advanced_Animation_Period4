@@ -97,14 +97,14 @@ JSVector.prototype.distanceSquared = function(v2){
 JSVector.prototype.rotate = function(angle) {
     this.mag = this.getMagnitude();
     this.x = this.getDirection();
-    
+
 }
 
 // Get the angle between this vector and another one
 JSVector.prototype.angleBetween = function(v2){
   var mag = this.getMagnitude();
   var mag2 = this.getMagnitude(v2);
-  return(Math.cos( (mag * mag2)/(|mag| * |mag2|) );
+  return(Math.cos( (mag * mag2)/(abs(mag2) * abs(mag2)) ));
 }
 
 // Make a copy of this vector
