@@ -52,5 +52,6 @@ Game.prototype.run = function(){
     for(let i = 0; i < this.bubbles.length; i++){
       this.bubbles[i].run();    // run each bubble
    }
+   bubbles[0].update();
   }
 }
