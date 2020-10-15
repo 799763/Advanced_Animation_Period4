@@ -92,13 +92,14 @@ Bubble.prototype.update = function(){
     this.acc = new JSVector(0, 0);
     if(this != Bub[0]){
         let d = this.loc.distance(Bub[0].loc);
-        if(d < 300){
+        if(d < 100){
             this.acc = JSVector.subGetNew(this.loc, Bub[0].loc);
             this.acc.normalize();
             this.acc.multiply(0.5);
         }
     }
     this.vel.add(this.acc);
+    this.vel.limit(3);
     this.loc.add(this.vel);
 }
 

@@ -50,7 +50,7 @@ function Game(){
 Game.prototype.run = function(){
   if(!this.gamePaused){
     for(let i = 0; i < this.bubbles.length; i++){
-      this.bubbles[i].run();    // run each bubble
+      this.bubbles[i].run(); //run each bubble
    }
   }
 }
