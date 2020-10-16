@@ -88,18 +88,33 @@ Bubble.prototype.render = function(){
 
 //Attraction update function
 Bubble.prototype.update = function(){
+    // let Bub = game.bubbles;
+    // this.acc = new JSVector(0, 0);
+    // if(this != Bub[0]){
+    //     let d = this.loc.distance(Bub[0].loc);
+    //     if(d < 100){
+    //         this.acc = JSVector.subGetNew(this.loc, Bub[0].loc);
+    //         this.acc.normalize();
+    //         this.acc.multiply(0.5);
+    //     }
+    // }
+    // this.vel.add(this.acc);
+    // this.vel.limit(3);
+    // this.loc.add(this.vel);
     let Bub = game.bubbles;
-    this.acc = new JSVector(0, 0);
+    let d = this.loc.distance(Bub[0].loc);
     if(this != Bub[0]){
-        let d = this.loc.distance(Bub[0].loc);
-        if(d < 100){
-            this.acc = JSVector.subGetNew(this.loc, Bub[0].loc);
-            this.acc.normalize();
-            this.acc.multiply(0.5);
+        if(d > 500){
+            this.acc = JSVector.subGetNew(Bub[0].loc, this.loc);//Attraction
         }
+        if(d < 100){
+            this.acc = JSVector.subGetNew(this.loc, Bub[0].loc);//Repulsion
+        }
+        this.acc.normalize();
+        this.acc.multiply(0.025);
+        this.vel.add(this.acc);
+        this.vel.limit(1);
     }
-    this.vel.add(this.acc);
-    this.vel.limit(3);
     this.loc.add(this.vel);
 }
 

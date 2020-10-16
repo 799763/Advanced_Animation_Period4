@@ -32,7 +32,7 @@ JSVector.prototype.setDirection = function(angle){
 
 // Get the direction (angle) of the vector
 JSVector.prototype.getDirection = function(){
-    return(Math.atan2(y,x));
+    return(Math.atan2(this.y,this.x));///
 }
 
 // Add another vector to this vector
@@ -83,7 +83,7 @@ JSVector.prototype.normalize = function(){
 JSVector.prototype.limit = function(lim){
   let mag = this.getMagnitude();
   if(mag > lim){
-    mag = lim;;
+    mag = lim;
   }
   return(this);
 }
