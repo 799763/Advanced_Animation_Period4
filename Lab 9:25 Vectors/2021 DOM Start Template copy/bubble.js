@@ -70,7 +70,6 @@ Bubble.prototype.render = function(){
           ctx.stroke();
           ctx.fill();
     }
-
   }
 //Bubbles update function
 //+++++++++++++++++++++++++++++++++++++++++++++++
