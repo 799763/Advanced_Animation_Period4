@@ -13,17 +13,7 @@ function Game(){
     this.bubbles = [];
     let numBubbles = 150;
     for(var i = 0; i < numBubbles; i++){
-        var x, y, dx, dy, diam, clr, r, g, b;
-        x = Math.random()*this.canvas.width;
-        y = Math.random()*this.canvas.height;
-        dx = Math.random()*6-3;
-        dy = Math.random()*6-3;
-        diam = 15;//Math.random()*20 + 10;
-        r = 255;
-        g = 255;
-        b = 255;
-        clr = "rgba(" + r + ", "+ g + ","+ b +")"
-        this.bubbles.push(new Bubble(x, y, dx, dy, diam, clr)); // add new bubble to array
+        this.bubbles.push(new Bubble()); // add new bubble to array
     }
 
     //  Add event handlers to all tile objects
