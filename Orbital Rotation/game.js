@@ -59,6 +59,6 @@ Game.prototype.createMovers = function(canvas, numMovers){
         b = Math.random() * 200 + 55;
         clr = "rgba(" + r + ", " + g +","+ b +")"
         numOrbs = Math.floor(Math.random() * 5 + 3);
-        this.movers[i] = new Mover(x, y, dx, dy, radius, cle, numOrbs);
+        this.movers[i] = new Mover(x, y, dx, dy, radius, clr, numOrbs);
     }
 }
