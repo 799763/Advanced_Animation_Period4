@@ -11,13 +11,18 @@ function Mover(x, y, dx, dy, r, c, n){// change parameters
   for(let i = 0; i < n; i++){
       let a = i * (Math.PI * 2) / numOrbs + this.orbiters;
       let angleVel = numOrbs * 0.01;
-      this.orbitors.push(new Orbiter(this, 4, 25, a, a));
+      this.orbitors.push(new Orbiter(this, 4, 25, this.angleVel, this.clr));
   }
 }
 Mover.prototype.run = function(){
     this.checkEdges();
     this.update();
     this.render();
+
+    for(let i = 0; i < this.orbitors.length; i++){
+      let orb = this.orbitors[i];
+      orb.run();/////
+    }
 }
 
 Mover.prototype.render = function(){
@@ -40,10 +45,10 @@ Mover.prototype.update = function(){
 }
 
 Mover.prototype.checkEdges = function(){
-    if(this.loc.x > canvas.width){ this.loc.x = -this.loc.x;}
-    if(this.loc.x < 0){ this.loc.x = -this.loc.x;}
-    if(this.loc.y > canvas.width){ this.loc.x = -this.loc.y;}
-    if(this.loc.y < 0){ this.loc.x = -this.loc.y;}
+    if(this.loc.x > canvas.width){ this.vel.x = -this.vel.x;}
+    if(this.loc.x < 0){ this.loc.x = -this.vel.x;}
+    if(this.loc.y > canvas.width){ this.vel.x = -this.vel.y;}
+    if(this.loc.y < 0){ this.loc.x = -this.vel.y;}
 }
 //Oscillator end++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -60,14 +65,34 @@ Mover.prototype.checkEdges = function(){
 //   }
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-function Orbiter(){
-
+function Orbiter(mover, orbiterRad, orbitRad, angle, angleVel, clr){
+    this.mover = mover;
+    this.orbiter = orbiterRad;
+    this.rotator = new JSVector(orbitRad, 0);
+    this.rotator.setDirection(angle);
+    this.loc = JSVector.addGetNew(this.mover.loc, this.rotator);
+    this.angleVel = angleVel;
+    this.clr = clr;
 }
 
   // draw the Oscillator on the canvas
-  Orbiter.prototype.render = function(){//Talk in class
+  Orbiter.prototype.render = function(){
+        ctx.strokeStyle = this.clr;
+        ctx.fillStyle = this.clr;
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.arc(this.loc.x, this.loc,y, this.radius, MAth.PI * 2, 0, false);
+        ctx.stroke();
+        ctx.fill();
 
+        ctx.lineCap = 4;
+        ctx.lineWidth = 4;
+        ctx.beginPath();
+        ctx.moveTo(this.mover.loc.x, this.mover.loc.y);
+        ctx.lineTo(this.loc.x, this.loc.y)
+        ctx.stroke();
     }
-  Orbiter.prototype.update = function(){ //Talk in class
-
+  Orbiter.prototype.update = function(){
+        this.rotator.rotate(angleVel);
+        this.loc = JSVector.addGetNew(this.mover.loc, this.rotator);
     }

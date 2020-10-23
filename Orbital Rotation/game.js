@@ -10,10 +10,10 @@ function Game(){
     this.ctx = this.canvas.getContext('2d'); // This is the context
 
     //   create the array of bubble objects
-    this.oscillators = [];
-    let numBubbles = 15;
-    for(var i = 0; i < numBubbles; i++){
-        this.oscillators.push(new Mover(this)); // add new bubble to array
+    this.orbitors = [];
+    let numOrbiters = 15;
+    for(var i = 0; i < numOrbiters; i++){
+        this.orbitors.push(new Mover(this)); // add new bubble to array
     }
 
     //  Add event handlers to all tile objects
@@ -34,13 +34,13 @@ function Game(){
           },false);
     }
 
-}//++++++++++++++++++++++  end Bubbles constructor
+}//++++++++++++++++++++++  end Game constructor
 
 // function to run the game each animation cycle
 Game.prototype.run = function(){
   if(!this.gamePaused){
-    for(let i = 0; i < this.oscillators.length; i++){
-      this.oscillators[i].run(); //run each bubble
+    for(let i = 0; i < this.orbitors.length; i++){
+      this.orbitors[i].run(); //run each bubble
    }
   }
 }
