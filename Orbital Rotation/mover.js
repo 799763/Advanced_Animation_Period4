@@ -1,5 +1,5 @@
 //  Oscillator constructor function +++++++++++++++++++++++++++++
-function Oscillator(x, y, dx, dy, r, c, n){// change parameters
+function Mover(x, y, dx, dy, r, c, n){// change parameters
   this.loc = new JSVector(x, y);
   this.vel = new JSVector(dx, dy);
   this.acc = new JSVector();
@@ -13,20 +13,34 @@ function Oscillator(x, y, dx, dy, r, c, n){// change parameters
       let angleVel = numOrbs * 0.01;
       this.orbitors.push(new Orbiter(this, 4, 25, a, a));
   }
+Mover.prototype.run = function(){
 
+}
+
+Mover.prototype.render = function(){
+
+}
+
+Mover.prototype.update = function(){
+
+}
+
+Mover.prototype.checkEdges = function(){
+
+}
 }//Oscillator end++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
   //  placing methods in the prototype (every Oscillator shares functions)
-Oscillator.prototype.run = function(){
-    this.update();
-    this.render();
-    this.checkEdges();
-  }
-
-Oscillator.prototype.checkEdges = function(){
-
-  }
+// Oscillator.prototype.run = function(){
+//     this.update();
+//     this.render();
+//     this.checkEdges();
+//   }
+//
+// Oscillator.prototype.checkEdges = function(){
+//
+//   }
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 function Orbiter(){

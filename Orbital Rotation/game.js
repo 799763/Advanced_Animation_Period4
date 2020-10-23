@@ -13,7 +13,7 @@ function Game(){
     this.oscillators = [];
     let numBubbles = 15;
     for(var i = 0; i < numBubbles; i++){
-        this.oscillators.push(new Oscillator(this)); // add new bubble to array
+        this.oscillators.push(new Mover(this)); // add new bubble to array
     }
 
     //  Add event handlers to all tile objects
@@ -43,4 +43,22 @@ Game.prototype.run = function(){
       this.oscillators[i].run(); //run each bubble
    }
   }
+}
+
+Game.prototype.createMovers = function(canvas, numMovers){
+    this.movers = [];
+    for(let i = 0; i < numMovers; i++){
+        var x, y, dx, dy, radius, clr, r, g, b, numOrbs;
+        radius = 7;
+        x = Math.random() * canvas.width;
+        y = Math.random() * canvas.height;
+        dx = Math.random() * 2 - 1;
+        dy = Math.random() * 2 - 1;
+        r = Math.random() * 200 + 55;
+        g = Math.random() * 200 + 55;
+        b = Math.random() * 200 + 55;
+        clr = "rgba(" + r + ", " + g +","+ b +")"
+        numOrbs = Math.floor(Math.random() * 5 + 3);
+        this.movers[i] = new Mover(x, y, dx, dy, radius, cle, numOrbs);
+    }
 }
