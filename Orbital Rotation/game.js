@@ -1,5 +1,6 @@
 function Game(){
 
+
     this.gamePaused = false;    // the game may be paused or not
     this.ga = new GameArea();   // create all the dom elements
     // get the canvas as a property of the game
@@ -61,4 +62,5 @@ Game.prototype.createMovers = function(canvas, numMovers){
         numOrbs = Math.floor(Math.random() * 5 + 3);
         this.movers[i] = new Mover(x, y, dx, dy, radius, clr, numOrbs);
     }
+    
 }
