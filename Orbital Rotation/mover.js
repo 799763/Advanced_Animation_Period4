@@ -18,7 +18,6 @@ Mover.prototype.run = function(){
   this.checkEdges();
   this.update();
   this.render();
-
   for(let i = 0; i < this.orbitors.length; i++){
     let orb = this.orbitors[i];
     orb.update();
@@ -27,8 +26,10 @@ Mover.prototype.run = function(){
 }
 
 Mover.prototype.render = function(){
-  ctx.fillStyle = c;
-  ctx.strokeStyle = c;
+  let ctx = game.context;
+  ctx.fillStyle = this.clr;
+  ctx.strokeStyle = this.clr;
+  ctx.lineWidth = 1;
   ctx.beginPath();
   ctx.arc(this.loc.x, this.loc.y, this.rad, Math.PI * 2, 0, false);
   ctx.stroke();
@@ -37,12 +38,8 @@ Mover.prototype.render = function(){
 
 Mover.prototype.update = function(){
   //Possibly missing code here
-  this.acc = JSVector(Math.random() * 2, Math.random() * 2);
-  this.acc.normalize();
-  this.acc.multiply(0.025);
-  this.vel.add(this.acc);
-  this.vel.limit(2);
-  this.loc.add(this.vel);
+this.vel.add(this.acc);
+this.acc.add(this.vel);
 }
 
 Mover.prototype.checkEdges = function(){
