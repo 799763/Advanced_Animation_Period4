@@ -7,10 +7,11 @@ function Mover(x, y, dx, dy, r, c, n){// change parameters
   this.orbitAngle = Math.random() * Math.PI;
   this.clr = c;
   this.orbitors = [];
+  this.numOrbs = n;
 
   for(let i = 0; i < n; i++){
-    let a = i * (Math.PI * 2) / numOrbs + this.orbiters;
-    let angleVel = numOrbs * 0.01;
+    let a = i * (Math.PI * 2) / this.numOrbs + this.orbiters;
+    let angleVel = this.numOrbs * 0.01;
     this.orbitors.push(new Orbiter(this, 4, 25, this.angleVel, this.clr));
   }
 }
@@ -37,9 +38,9 @@ Mover.prototype.render = function(){
 }
 
 Mover.prototype.update = function(){
-  //Possibly missing code here
-this.vel.add(this.acc);
-this.acc.add(this.vel);
+
+  this.vel.add(this.acc);
+  this.acc.add(this.vel);
 }
 
 Mover.prototype.checkEdges = function(){
@@ -75,11 +76,12 @@ function Orbiter(mover, orbiterRad, orbitRad, angle, angleVel, clr){
 
 // draw the Oscillator on the canvas
 Orbiter.prototype.render = function(){
+  let ctx = game.ctx;
   ctx.strokeStyle = this.clr;
   ctx.fillStyle = this.clr;
   ctx.lineWidth = 1;
   ctx.beginPath();
-  ctx.arc(this.loc.x, this.loc,y, this.radius, MAth.PI * 2, 0, false);
+  ctx.arc(this.loc.x, this.loc.y, this.radius, Math.PI * 2, 0, false);
   ctx.stroke();
   ctx.fill();
 
@@ -91,6 +93,6 @@ Orbiter.prototype.render = function(){
   ctx.stroke();
 }
 Orbiter.prototype.update = function(){
-  this.rotator.rotate(angleVel);
+  this.rotator.rotate(this.angleVel);
   this.loc = JSVector.addGetNew(this.mover.loc, this.rotator);
 }
