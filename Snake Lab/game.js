@@ -10,10 +10,10 @@ function Game(){
     this.ctx = this.canvas.getContext('2d'); // This is the context
 
     //   create the array of bubble objects
-    this.oscillators = [];
+    this.snake = [];
     let numBubbles = 15;
     for(var i = 0; i < numBubbles; i++){
-        this.oscillators.push(new Oscillator(this)); // add new bubble to array
+        this.snake.push(new Snake(this)); // add new bubble to array
     }
 
     //  Add event handlers to all tile objects
@@ -39,8 +39,22 @@ function Game(){
 // function to run the game each animation cycle
 Game.prototype.run = function(){
   if(!this.gamePaused){
-    for(let i = 0; i < this.oscillators.length; i++){
-      this.oscillators[i].run(); //run each bubble
+    for(let i = 0; i < this.snake.length; i++){
+      this.snake[i].run(); //run each bubble
    }
+  }
+}
+
+Game.prototype.createSegments = function(canvas, numSegments){
+  this.segments = [];
+  for(let i = 0; i < numSegments; i++){
+      var x, y, clr, r, g, b;
+      x = Math.random() * canvas.width;
+      y = Math.random() * canvas.height;
+      r = Math.random() * 200 + 55;
+      g = Math.random() * 200 + 55;
+      b = Math.random() * 200 + 55;
+      clr = "rgba(" + r + ", " + g +","+ b +")";
+      this.segments[i] = new Snake(x , y, clr, i);
   }
 }
