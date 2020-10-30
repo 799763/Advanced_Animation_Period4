@@ -26,7 +26,7 @@ Mover.prototype.run = function(){
 }
 
 Mover.prototype.render = function(){
-  let ctx = game.context;
+  let ctx = game.ctx;
   ctx.fillStyle = this.clr;
   ctx.strokeStyle = this.clr;
   ctx.lineWidth = 1;
