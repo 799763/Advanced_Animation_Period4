@@ -4,6 +4,7 @@ window.onload = init;//  After the window has been loaded, go to init
 
 function init(){
     game = new Game();  // global game
+    game.createMovers(game.canvas, 5);
     animate();          // kick off the animation
 }
 
@@ -13,6 +14,5 @@ function animate(){
   game.ctx.fillStyle = 'rgba(0,0,0,.05)'
   game.ctx.fillRect(0,0,game.canvas.width,game.canvas.height);
   game.run(); // run the game
-  game.createMovers(696, 5);
   requestAnimationFrame(animate);
 }

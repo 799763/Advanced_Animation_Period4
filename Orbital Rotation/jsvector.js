@@ -123,10 +123,18 @@ JSVector.prototype.copy = function(){
 }
 
 // Override inherited toString() to describe this instance
+// JSVector.prototype.toString = function() {
+//   let x = this.x.toFixed(2);
+//   let y = this.y.toFixed(2);
+//   let mag = this.getMagnitude().toFixed(2);
+//   let dir = this.getDirection().toFixed(2);
+//   return("x: " + x + "y: "+ y + "Magnitude: " + mag + "Direction: " + dir);
+// }
+// Override inherited toString() to describe this instance
 JSVector.prototype.toString = function() {
-  let x = this.x.toFixed(2);
-  let y = this.y.toFixed(2);
-  let mag = this.getMagnitude().toFixed(2);
-  let dir = this.getDirection().toFixed(2);
-  return("x: " + x + "y: "+ y + "Magnitude: " + mag + "Direction: " + dir);
+    var x_ = this.x.toFixed(2);
+    var y_ = this.y.toFixed(2);
+    var m = this.getMagnitude().toFixed(2);
+    var a = (this.getDirection()*360/(2*Math.PI)).toFixed(2);
+    return(` x: ${x_}, y: ${y_}, mag: ${m}, angle: ${a}`);
 }

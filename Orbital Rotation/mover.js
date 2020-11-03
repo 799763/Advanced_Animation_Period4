@@ -6,21 +6,21 @@ function Mover(x, y, dx, dy, r, c, n){// change parameters
   this.rad = r;
   this.orbitAngle = Math.random() * Math.PI;
   this.clr = c;
-  this.orbitors = [];
+  this.orbiters = [];
   this.numOrbs = n;
 
-  for(let i = 0; i < n; i++){
+  for(let i = 0; i < n; i++){ //changed here
     let a = i * (Math.PI * 2) / this.numOrbs + this.orbiters;
     let angleVel = this.numOrbs * 0.01;
-    this.orbitors.push(new Orbiter(this, 4, 25, this.angleVel, this.clr));
+    this.orbiters.push(new Orbiter(this, 4, 25, this.angleVel, this.clr));
   }
 }
 Mover.prototype.run = function(){
   this.checkEdges();
   this.update();
   this.render();
-  for(let i = 0; i < this.orbitors.length; i++){
-    let orb = this.orbitors[i];
+  for(let i = 0; i < this.orbiters.length; i++){
+    let orb = this.orbiters[i];
     orb.update();
     orb.render();
   }
@@ -40,14 +40,14 @@ Mover.prototype.render = function(){
 Mover.prototype.update = function(){
 
   this.vel.add(this.acc);
-  this.acc.add(this.vel);
+  this.loc.add(this.vel);
 }
 
 Mover.prototype.checkEdges = function(){
   if(this.loc.x > canvas.width){ this.vel.x = -this.vel.x;}
-  if(this.loc.x < 0){ this.loc.x = -this.vel.x;}
-  if(this.loc.y > canvas.width){ this.vel.x = -this.vel.y;}
-  if(this.loc.y < 0){ this.loc.x = -this.vel.y;}
+  if(this.loc.x < 0){ this.vel.x = -this.vel.x;}
+  if(this.loc.y > canvas.width){ this.vel.y = -this.vel.y;}
+  if(this.loc.y < 0){ this.vel.y = -this.vel.y;}
 }
 //Oscillator end++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
