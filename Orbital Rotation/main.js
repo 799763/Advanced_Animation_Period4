@@ -5,7 +5,7 @@ window.onload = init;//  After the window has been loaded, go to init
 function init(){
     game = new Game();  // global game
     game.createMovers(game.canvas, 5);
-    animate();          // kick off the animation
+    animate();// kick off the animation
 }
 
 //  animation loop called 60 fps
