@@ -4,7 +4,7 @@ function Snake(x, y, color, id){// change parameter
     this.vel = new JSVector(Math.random(-3)*3, Math.random(-3)*3);
     this.id = id;
     this.clr = color;
-    let segments = game.segments;
+    this.snake = game.snake;
 }
   //  placing methods in the prototype (every Oscillator shares functions)
 Snake.prototype.run = function(){
@@ -14,12 +14,23 @@ Snake.prototype.run = function(){
   }
 
 Snake.prototype.update = function(){
-  let head = segments[0];
-  for(let i = 0; i < segments.length; i++){
+  let head = snake[0];
+  for(let i = 0; i < snake.length; i++){
     if(i !== head){
-        
+        let d = this.loc.distance(this.snake[i - 1].loc);
+        if(d > 500){
+          this.acc = JSVector.subGetNew(snake[0].loc, this.loc);
+        }
+        if(d < 15){
+          this.acc = JSVector.subGetNew(this.loc, this.snake[i - 1].loc);
+        }
     }
+    this.acc.normalize();
+    this.acc.multiply(0.025);
+    this.vel.add(this.acc);
+    this.vel.limit(1);
   }
+  this.loc.add(this.vel);
 }
 
 // draw the Oscillator on the canvas
