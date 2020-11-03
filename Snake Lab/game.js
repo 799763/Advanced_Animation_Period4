@@ -11,9 +11,9 @@ function Game(){
 
     //   create the array of bubble objects
     this.snake = [];
-    let numBubbles = 15;
-    for(var i = 0; i < numBubbles; i++){
-        this.snake.push(new Snake(this)); // add new segmant to array
+    let numSegments = 15;
+    for(var i = 0; i < numSegments; i++){
+        this.snake.push(new Snake(this.createSegments(canvas, numSegments))); // add new segmant to array
     }
 
     //  Add event handlers to all tile objects
