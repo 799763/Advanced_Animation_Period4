@@ -10,7 +10,7 @@ function Game(){
     this.ctx = this.canvas.getContext('2d'); // This is the context
 
     //   create the array of bubble objects
-    let snake = [];
+    this.snake = [];
     let numBubbles = 15;
     for(var i = 0; i < numBubbles; i++){
         this.snake.push(new Snake(this)); // add new segmant to array
