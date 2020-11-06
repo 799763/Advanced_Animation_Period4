@@ -3,7 +3,7 @@ function Snake(x, y, color, id){// change parameter
     this.vel = new JSVector(Math.random(-3)*3, Math.random(-3)*3);
     this.id = id;
     this.clr = color;
-    // this.snake = game.snake;
+    this.snake = game.snake;
 }
   //  placing methods in the prototype (every Oscillator shares functions)
 Snake.prototype.run = function(){
