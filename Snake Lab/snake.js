@@ -3,7 +3,7 @@ function Snake(x, y, color, id){// change parameter
     this.vel = new JSVector(Math.random(-3)*3, Math.random(-3)*3);
     this.id = id;
     this.clr = color;
-    this.snake = game.snake;
+    // this.snake = game.snake;
 }
   //  placing methods in the prototype (every Oscillator shares functions)
 Snake.prototype.run = function(){
@@ -56,5 +56,41 @@ Snake.prototype.checkEdges = function(){
     }
     if(this.loc.y > canvas.height){
       this.vel.y = -this.vel.y;
+    }
+}
+//===================================================
+//===================================================
+function Mover(){
+    this.loc = new JSVector(Math.random()*canvas.width, Math.random()*canvas.height);
+    this.rad = 15;
+    this.vel = new JSVector(Math.random()*5, Math.random()*5);
+    this.acc = new JSVector(Math.random()*5, Math.random()*5);
+
+    Mover.prototype.run = function(){
+      this.checkEdges();
+      this.update();
+      this.render();
+    }
+
+    Mover.prototype.update = function(){
+      this.vel.add(this.acc);
+      this.loc.add(this.vel);
+    }
+
+    Mover.prototype.render = function(){
+      let ctx = game.ctx;
+      ctx.strokeStyle = "rgba(255, 50, 50)";
+      ctx.beginPath();
+      ctx.arc(this.loc.x,this.loc.y, this.rad, Math.PI*2, 0, false);
+      ctx.stroke();
+      ctx.fill();
+    }
+
+    Mover.prototype.checkEdges = function(){
+      let canvas = game.canvas;
+      if(this.loc.x > canvas.width) this.vel.x = -this.vel.x;
+      if(this.loc.x < 0) this.vel.x = -this.vel.x;
+      if(this.loc.y > canvas.height) this.vel.y = -this.vel.y;
+      if(this.loc.y < 0) this.vel.y = -this.vel.y;
     }
 }

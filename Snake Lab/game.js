@@ -38,6 +38,8 @@ function Game(){
 
 // function to run the game each animation cycle
 Game.prototype.run = function(){
+  this.ball = new Mover();
+  this.ball.run();
   if(!this.gamePaused){
     for(let i = 0; i < this.snake.length; i++){
       this.snake[i].run(); //run each bubble
