@@ -1,4 +1,3 @@
-//  Oscillator constructor function +++++++++++++++++++++++++++++
 function Snake(x, y, color, id){// change parameter
     this.loc = new JSVector(x, y);
     this.vel = new JSVector(Math.random(-3)*3, Math.random(-3)*3);
@@ -14,9 +13,9 @@ Snake.prototype.run = function(){
   }
 
 Snake.prototype.update = function(){
-  let head = snake[0];
   for(let i = 0; i < snake.length; i++){
-    if(i !== head){
+    if(i !== this.snake[0]){
+
         let d = this.loc.distance(this.snake[i - 1].loc);
         if(d > 500){
           this.acc = JSVector.subGetNew(snake[0].loc, this.loc);
