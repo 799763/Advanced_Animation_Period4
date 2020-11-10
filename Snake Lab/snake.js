@@ -1,9 +1,10 @@
-function Snake(x, y, color, id){// change parameter
+function Snake(this, x, y, color, id){// change parameter
     this.loc = new JSVector(x, y);
     this.vel = new JSVector(Math.random(-3)*3, Math.random(-3)*3);
     this.id = id;
     this.clr = color;
     this.snake = game.snake;
+  }
 
   //  placing methods in the prototype (every Oscillator shares functions)
 Snake.prototype.run = function(){
@@ -63,7 +64,7 @@ function Mover(){
     this.rad = 15;
     this.vel = new JSVector(Math.random()*5, Math.random()*5);
     this.acc = new JSVector(Math.random()*5, Math.random()*5);
-
+}
     Mover.prototype.run = function(){
       this.checkEdges();
       this.update();
@@ -91,4 +92,3 @@ function Mover(){
       if(this.loc.y > canvas.height) this.vel.y = -this.vel.y;
       if(this.loc.y < 0) this.vel.y = -this.vel.y;
     }
-}
