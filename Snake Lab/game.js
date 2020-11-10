@@ -13,7 +13,7 @@ function Game(){
         this.snake = [];
         let numSegments = 15;
         for(var i = 0; i < numSegments; i++){
-            this.snake.push(new Snake(canvas, numSegments)); // add new segmant to array
+            this.snake.push(new Snake(this, canvas, numSegments)); // add new segmant to array
         }
     //  Add event handlers to all tile objects
     for(let i = 0; i < this.ga.tiles.length; i++){
