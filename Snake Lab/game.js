@@ -9,12 +9,12 @@ function Game(){
     // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D
     this.ctx = this.canvas.getContext('2d'); // This is the context
 
-    //   create the array of bubble objects
+    //   create the array of snake objects
     this.snake = [];
     let numSegments = 15;
     for(var i = 0; i < numSegments; i++){
         this.snake.push(new Snake(this.createSegments(canvas, numSegments))); // add new segmant to array
-    }// commented out and moved to snake.js
+    }
 
     //  Add event handlers to all tile objects
     for(let i = 0; i < this.ga.tiles.length; i++){
