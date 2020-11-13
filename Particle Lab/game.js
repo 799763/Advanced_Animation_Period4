@@ -9,6 +9,7 @@ function Game(){
     // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D
     this.ctx = this.canvas.getContext('2d'); // This is the context
 
+    this.particleSystems.push(new ParticleSystem());
     //  Add event handlers to all tile objects
     for(let i = 0; i < this.ga.tiles.length; i++){
         this.ga.tiles[i].addEventListener('mouseover', // mouseover is the name of an event
@@ -32,7 +33,8 @@ function Game(){
 // function to run the game each animation cycle
 Game.prototype.run = function(){
   if(!this.gamePaused){
-    for(let i = 0; i < this; i++){ //unfinished loop
+    for(let i = 0; i < this.particleSystems.length; i++){
+      particleSystems[i].run();
    }
   }
 }
