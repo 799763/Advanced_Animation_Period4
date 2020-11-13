@@ -10,8 +10,9 @@ function Game(){
     this.ctx = this.canvas.getContext('2d'); // This is the context
 
         let numSegments = 15;
+        let snakeSegments = [];
         for(var i = 0; i < numSegments; i++){
-            this.snake.push(game.createSegments(this, canvas, numSegments)); // add new segmant to array
+            snakeSegments.push(createSegments(canvas, numSegments)); // add new segmant to array
         }
     //  Add event handlers to all tile objects
     for(let i = 0; i < this.ga.tiles.length; i++){
@@ -36,7 +37,7 @@ function Game(){
 //function to run the game each animation cycle
 Game.prototype.run = function(){
   if(!this.gamePaused){
-      this.snake.run();
+      this.snakeSegments.run();
   }
 }
 

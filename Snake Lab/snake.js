@@ -1,10 +1,9 @@
-function Snake(x, y, dx , dy, segArray){// change parameter
+function Snake(x, y, dx , dy, segArray){// changed parameters
     this.loc = new JSVector(x, y);
     this.vel = new JSVector(dx, dy);
     this.snakeSegments = segArray;
   }
 
-  //  placing methods in the prototype (every Oscillator shares functions)
 Snake.prototype.run = function(){
     this.update();
     this.render();
@@ -12,11 +11,9 @@ Snake.prototype.run = function(){
   }
 
 Snake.prototype.update = function(){
-  for(let i = 1; i < game.snake.length-1; i++){
-    //if(i != 0){
-        this.segments[0] = this.loc;
-          this.acc = JSVector.subGetNew(game.snake[i-1].loc, game.snake[i].loc);//deleted "-1" from i
-    //}
+  for(let i = 1; i < snakeSegments.length; i++){
+    this.head = this.snakeSegments[0];
+    this.acc = JSVector.subGetNew(this.head, snakeSegments[i]);
     // this.acc.normalize();
     // this.acc.multiply(0.025);
     this.vel.add(this.acc);
