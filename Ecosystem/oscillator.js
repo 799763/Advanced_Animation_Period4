@@ -1,3 +1,6 @@
+
+//Use for a animal in your ecosystem
+
 //  Oscillator constructor function +++++++++++++++++++++++++++++
 function Oscillator(g){// change parameters
     this.angle = new JSVector();

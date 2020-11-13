@@ -9,13 +9,6 @@ function Game(){
     // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D
     this.ctx = this.canvas.getContext('2d'); // This is the context
 
-    //   create the array of bubble objects
-    this.oscillators = [];
-    let numBubbles = 15;
-    for(var i = 0; i < numBubbles; i++){
-        this.oscillators.push(new Oscillator(this)); // add new bubble to array
-    }
-
     //  Add event handlers to all tile objects
     for(let i = 0; i < this.ga.tiles.length; i++){
         this.ga.tiles[i].addEventListener('mouseover', // mouseover is the name of an event
@@ -39,8 +32,7 @@ function Game(){
 // function to run the game each animation cycle
 Game.prototype.run = function(){
   if(!this.gamePaused){
-    for(let i = 0; i < this.oscillators.length; i++){
-      this.oscillators[i].run(); //run each bubble
+    for(let i = 0; i < this; i++){ //unfinished loop
    }
   }
 }
