@@ -9,11 +9,9 @@ function Game(){
     // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D
     this.ctx = this.canvas.getContext('2d'); // This is the context
 
-    //   create the array of snake objects
-        this.snake = [];
         let numSegments = 15;
         for(var i = 0; i < numSegments; i++){
-            this.snake.push(new Snake(this, canvas, numSegments)); // add new segmant to array
+            this.snake.push(game.createSegments(this, canvas, numSegments)); // add new segmant to array
         }
     //  Add event handlers to all tile objects
     for(let i = 0; i < this.ga.tiles.length; i++){
@@ -33,16 +31,12 @@ function Game(){
           },false);
     }
 
-}//++++++++++++++++++++++  end Bubbles constructor
+}//++++++++++++++++++++++  end game constructor
 
 //function to run the game each animation cycle
 Game.prototype.run = function(){
-  // this.ball = new Mover();
-  // this.ball.run();
   if(!this.gamePaused){
-    for(let i = 0; i < this.snake.length; i++){
-      this.snake[i].run(); //run each bubble
-   }
+      this.snake.run();
   }
 }
 
@@ -51,11 +45,8 @@ Game.prototype.createSegments = function(canvas, numSegments){
       var x, y, clr, r, g, b, id;
       x = Math.random() * canvas.width;
       y = Math.random() * canvas.height;
-      r = Math.random() * 200 + 55;
-      g = Math.random() * 200 + 55;
-      b = Math.random() * 200 + 55;
-      clr = "rgba(" + r + ", " + g +","+ b +")";
-      id = i;
-      this.snake[i] = new Snake(this, x , y, clr, id);
+      dx = Math.random() * 0.5;
+      dy = Math.random() * 0.5;
+      this.snake[i] = new Snake(x, y, dx, dy, segArray);
   }
 }
