@@ -2,6 +2,7 @@ function Game(){
 
     this.gamePaused = false;    // the game may be paused or not
     this.ga = new GameArea();   // create all the dom elements
+    this.particleSystems = [50];  // create particleSystems array
     // get the canvas as a property of the game
     // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas
     this.canvas = document.getElementById('canvas');
@@ -10,6 +11,7 @@ function Game(){
     this.ctx = this.canvas.getContext('2d'); // This is the context
 
     this.particleSystems.push(new ParticleSystem());
+
     //  Add event handlers to all tile objects
     for(let i = 0; i < this.ga.tiles.length; i++){
         this.ga.tiles[i].addEventListener('mouseover', // mouseover is the name of an event
