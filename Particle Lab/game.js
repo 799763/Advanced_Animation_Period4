@@ -2,7 +2,7 @@ function Game(){
 
     this.gamePaused = false;    // the game may be paused or not
     this.ga = new GameArea();   // create all the dom elements
-    this.particleSystems = [50];  // create particleSystems array
+    this.particleSystems = [];  // create particleSystems array
     // get the canvas as a property of the game
     // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas
     this.canvas = document.getElementById('canvas');
@@ -36,7 +36,7 @@ function Game(){
 Game.prototype.run = function(){
   if(!this.gamePaused){
     for(let i = 0; i < this.particleSystems.length; i++){
-      particleSystems[i].run();
+      this.particleSystems[i].run();
    }
   }
 }

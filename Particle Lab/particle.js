@@ -3,11 +3,11 @@ function Particle(location){
    this.loc = location.copy();
    this.vel = new JSVector(Math.random()*2-1, -2);
    this.acc = new JSVector(0, 0.05);
-   this.rad = 2;
+   this.rad = 10; // size of particle
    this.red = 240;
    this.green = 240;
    this.blue = 0;
-   this.lifeSpan = Math.random()*255;
+   this.lifeSpan = Math.floor(Math.random()*255);
    this.isDead = false;
 }
    Particle.prototype.run = function(){
@@ -19,7 +19,7 @@ function Particle(location){
      this.vel.add(this.acc);
      this.loc.add(this.vel);
      this.lifeSpan -= 2;
-     if(lifeSpan < 0){
+     if(this.lifeSpan < 0){
         this.isDead = true;
      }
    }
@@ -29,5 +29,5 @@ function Particle(location){
      ctx.fillStyle = "rgba(" + this.red + "," + this.green + "," + this.blue + "," + this.lifeSpan/255 + ")";
      ctx.beginPath();
      ctx.arc(this.loc.x, this.loc.y, this.rad, 0, Math.PI*2);
-     ctx.fill(lifeSpan);
+     ctx.fill(); //removed "this.lifeSpan" from inside parenthesees
    }

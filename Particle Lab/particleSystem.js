@@ -7,11 +7,11 @@ function ParticleSystem(){
 }
 
 ParticleSystem.prototype.run = function(){
-  for(var i = particles.length-1; i > 0; i--){
+  for(var i = this.particles.length-1; i > 0; i--){
     this.particles[i].run();
     if(this.particles[i].isDead){
         this.particles[i].splice(i, 1);
-        this.particles.push(new Particle(this.emitter)); 
+        this.particles.push(new Particle(this.emitter));
     }
   }
 }
