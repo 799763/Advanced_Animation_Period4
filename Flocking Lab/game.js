@@ -2,7 +2,6 @@ function Game(){
 
     this.gamePaused = false;    // the game may be paused or not
     this.ga = new GameArea();   // create all the dom elements
-    this.particleSystems = [];  // create particleSystems array
     // get the canvas as a property of the game
     // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas
     this.canvas = document.getElementById('canvas');
@@ -10,7 +9,7 @@ function Game(){
     // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D
     this.ctx = this.canvas.getContext('2d'); // This is the context
 
-    this.particleSystems.push(new ParticleSystem());
+
 
     //  Add event handlers to all tile objects
     for(let i = 0; i < this.ga.tiles.length; i++){
@@ -30,7 +29,7 @@ function Game(){
           },false);
     }
 
-}//++++++++++++++++++++++  end Bubbles constructor
+}//++++++++++++++++++++++  end Game constructor
 
 // function to run the game each animation cycle
 Game.prototype.run = function(){
