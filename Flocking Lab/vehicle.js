@@ -17,11 +17,13 @@ Vehicle.prototype.run = function(){
 }
 
 Vehicle.prototype.seek = function(){
-  for(let i = 0; i < 20; i++){
-    this.target = JSVector.subGetNew(this.vehicle[i].loc, this.vehicle.loc);
-    this.target.normalize();
-    this.target.multiply(this.maxSpeed);
-  }
+  //Orignial Code
+  // for(let i = 0; i < 20; i++){
+  //   this.target = JSVector.subGetNew(this.vehicle[i].loc, this.vehicle.loc);
+  //   this.target.normalize();
+  //   this.target.multiply(this.maxSpeed);
+  // }
+  let d = //distance between anything close
 
   this.vel.limit(this.maxForce);
   this.applyForce(this.vel);
