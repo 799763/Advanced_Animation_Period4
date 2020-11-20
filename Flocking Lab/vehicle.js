@@ -18,7 +18,7 @@ Vehicle.prototype.run = function(){
 
 Vehicle.prototype.seek = function(){
   for(let i = 0; i < 20; i++){
-    this.target = JSVector.subGetNew(this.vehicle[i].loc);
+    this.target = JSVector.subGetNew(this.vehicle[i].loc, this.vehicle.loc);
     this.target.normalize();
     this.target.multiply(this.maxSpeed);
   }
@@ -28,7 +28,7 @@ Vehicle.prototype.seek = function(){
 }
 
 Vehicle.prototype.applyForce = function(force){
-  this.acc.addGetNew(this.force);
+  this.acc.add(this.force);
 }
 
 Vehicle.prototype.update = function(){
