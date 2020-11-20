@@ -24,10 +24,11 @@ Vehicle.prototype.seek = function(){
   }
 
   this.vel.limit(this.maxForce);
-  this.applyForce(this.vel);// apply force to objects acceleration
+  this.applyForce(this.vel);
 }
 
 Vehicle.prototype.applyForce = function(force){
+  // apply force to objects acceleration
   this.acc.add(this.force);
 }
 
