@@ -9,7 +9,11 @@ function Game(){
     // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D
     this.ctx = this.canvas.getContext('2d'); // This is the context
 
-
+    this.vehicles = [];
+    let numVehicles = 20;
+    for(var i = 0; i < numVehicles; i++){
+      this.vehicles.push(new Vehicle(this));
+    }
 
     //  Add event handlers to all tile objects
     for(let i = 0; i < this.ga.tiles.length; i++){
@@ -34,8 +38,8 @@ function Game(){
 // function to run the game each animation cycle
 Game.prototype.run = function(){
   if(!this.gamePaused){
-    for(let i = 0; i < this.particleSystems.length; i++){
-      this.particleSystems[i].run();
+    for(let i = 0; i < this.vehicles.length; i++){
+      this.vehicles[i].run();//run each object in the vehicle array
    }
   }
 }
