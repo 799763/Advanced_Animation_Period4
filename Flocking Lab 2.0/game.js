@@ -6,6 +6,12 @@ function Game(){
     // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D
     this.ctx = this.canvas.getContext('2d'); // This is the context
 
+    this.numVehicles = 20;
+    this.vehicles = [];
+    for(let i = 20; i < this.numVehicles; i++){
+      this.vehicles[i].push(new Vehicle());
+    }
+
     // setup 6 sliders
     let updateSlider = function(e) {    // update event handler
         e.target.display.textContent = e.target.value;
@@ -26,5 +32,7 @@ function Game(){
 
 // function to run the game each animation cycle
 Game.prototype.run = function(){
-
+  for(let i = 20; i < this.numVehicles; i++){
+    this.vehicles[i].run();
+  }
 }

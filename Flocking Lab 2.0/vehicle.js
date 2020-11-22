@@ -1,4 +1,4 @@
-function Vehichle(){
+function Vehicle(){
   this.location;
   this.velocity;
   this.acceleration;
@@ -10,7 +10,9 @@ function Vehichle(){
 }
 
 Vehicle.prototype.run = function(){
-
+  this.update();
+  this.render();
+  this.seek();
 }
 
 Vehicle.prototype.update = function(){
