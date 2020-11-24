@@ -91,3 +91,11 @@ Vehicle.prototype.separate = function(array){
     }
   }
 }
+
+Vehicle.prototype.applyBehaviors = function(array){
+    this.separate(array);
+    this.seek();
+
+    this.applyForce(this.separate);
+    this.applyForce(this.seek);
+}
