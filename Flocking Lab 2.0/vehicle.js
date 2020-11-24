@@ -2,8 +2,8 @@ function Vehicle(){
   this.location;
   this.velocity;
   this.acceleration;
-  this.maxSpeed;
-  this.maxForce;
+  this.maxSpeed = 4;
+  this.maxForce = 0.1;
   this.desired = new JSVector(0,0);
   this.steer = new JSVector(0,0);
 
@@ -53,4 +53,41 @@ Vehicle.prototype.seek = function(target){
 
 Vehicle.prototype.applyForce = function(force){
   this.acceleration.add(force);
+}
+
+Vehicle.prototype.arrive = function(target){
+  this.desired = JSVector.sub(target, this.location);
+
+  let d = this.desired.getMagnitude();
+  this.desired.normalize();
+  this.desired.multiply(this.maxSpeed);
+
+  this.steer = JSVector.sub(this.desired, this.velocity);
+  this.steer.limit(this.maxSpeed);
+  this.applyForce(this.steer);
+}
+
+Vehicle.prototype.separate = function(array){
+  let desiredSeparation = 20;
+  let d = new JSVector(0,0);
+  let diff = new JSVector(0,0);
+  let count = 0;
+  let sum = new JSVector(0,0);
+  for(let i = 0; i < array.length; i++){
+    this.d = JSVector.distance(this.location, array[i].location);
+    if((this.d > 0) && (this.d < this.desiredSeparation)){
+      this.diff = JSVector.sub(this.location, array[i].location);
+      this.diff.normalize();
+      this.divide(this.d);
+      this.sum.add(this.diff);
+      this.count++;
+    }
+    if(this.count > 0){
+      this.sum.divide(this.count);
+      this.sum.setMagnitude(this.maxSpeed);
+      this.steer.sub(this.sum,this.vel);
+      this.steer.limit(this.maxForce);
+      this.applyForce(this.steer);
+    }
+  }
 }

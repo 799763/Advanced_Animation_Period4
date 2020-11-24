@@ -34,5 +34,6 @@ function Game(){
 Game.prototype.run = function(){
   for(let i = 20; i < this.numVehicles; i++){
     this.vehicles[i].run();
+    this.vehicles[i].separate(this.vehicles);
   }
 }
