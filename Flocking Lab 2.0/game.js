@@ -7,9 +7,10 @@ function Game(){
     this.ctx = this.canvas.getContext('2d'); // This is the context
 
     this.numVehicles = 20;
+    let loc = new JSVector(Math.random()*canvas.width, Math.random()*canvas.height);
     this.vehicles = [];
     for(let i = 20; i < this.numVehicles; i++){
-      this.vehicles[i].push(new Vehicle());
+      this.vehicles[i].push(new Vehicle(this.loc));
     }
 
     // setup 6 sliders
