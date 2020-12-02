@@ -1,7 +1,7 @@
 function Vehicle(location){
-  this.location = new JSVector(location.x, location.y);
+  this.location = location;
   this.velocity = new JSVector(Math.random()*3, Math.random()*3);
-  this.acceleration = new JSVector(0,0.1);
+  this.acceleration = new JSVector(0,0);
   this.maxSpeed = 4;
   this.maxForce = 0.1;
   this.desired = new JSVector(0,0);
@@ -9,9 +9,10 @@ function Vehicle(location){
 }
 
 Vehicle.prototype.run = function(){
-  this.flock(game.vehicles);
+  //this.flock(game.vehicles);
   this.update();
   this.render();
+  this.checkEdges();
 }
 
 Vehicle.prototype.update = function(){
@@ -24,32 +25,48 @@ Vehicle.prototype.render = function(){
   let ctx = game.ctx;
   ctx.save();
   ctx.translate(this.location.x, this.location.y);
-  ctx.rotate(this.vel.getDirection());
+  ctx.rotate(this.velocity.getDirection() + Math.PI/2);
   ctx.beginPath();
   ctx.fillStyle = "rgba(255, 75, 25)";
   ctx.strokeStyle = "rgba(255, 75, 25)";
   ctx.lineWidth = 1;
-  ctx.moveTo(0, -15);
-  ctx.lineTo(-15, 15);
+  ctx.moveTo(0, -10);
+  ctx.lineTo(-10, 10);
   ctx.lineTo(0, 0);
+  ctx.lineTo(10, 10);
   ctx.closePath();
   ctx.stroke();
   ctx.fill();
   ctx.restore();
 }
 
+Vehicle.prototype.checkEdges = function(){
+  if(this.location.x < 0){
+    this.velocity.x = -this.velocity.x;
+  }
+  if(this.location.x > canvas.width){
+    this.velocity.x = -this.velocity.x;
+  }
+  if(this.location.y < 0){
+    this.velocity.y = -this.velocity.y;
+  }
+  if(this.location.y > canvas.height){
+    this.velocity.y = -this.velocity.y;
+  }
+}
+
 Vehicle.prototype.flock = function(vehicles){
   let sep = this.separate(vehicles);
-  let ali = this.align(vehicles);
-  let coh = this.cohesion(vehicles);
+  //let ali = this.align(vehicles);
+  //let coh = this.cohesion(vehicles);
 
   sep.mult(1.5);
-  ali.mult(1.0);
-  coh.mult(1.0);
+  //ali.mult(1.0);
+  //coh.mult(1.0);
 
   applyForce(sep);
-  applyForce(ali);
-  applyForce(coh);
+  //applyForce(ali);
+  //applyForce(coh);
 }
 
 Vehicle.prototype.applyForce = function(force){

@@ -7,10 +7,10 @@ function Game(){
     this.ctx = this.canvas.getContext('2d'); // This is the context
 
     this.numVehicles = 20;
-    let loc = new JSVector(Math.random()*canvas.width, Math.random()*canvas.height);
     this.vehicles = [];
-    for(let i = 20; i < this.numVehicles; i++){
-      this.vehicles[i].push(new Vehicle(this.loc));
+    for(let i = 0; i < this.numVehicles; i++){
+      let loc = new JSVector(Math.random()*this.canvas.width, Math.random()*this.canvas.height);
+      this.vehicles.push(new Vehicle(loc));
     }
 
     // setup 6 sliders
@@ -33,7 +33,7 @@ function Game(){
 
 // function to run the game each animation cycle
 Game.prototype.run = function(){
-  for(let i = 20; i < this.numVehicles; i++){
+  for(let i = 0; i < this.vehicles.length; i++){
     this.vehicles[i].run();
   }
 }
