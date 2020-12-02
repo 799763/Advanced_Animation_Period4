@@ -1,6 +1,6 @@
 function Vehicle(location){
-  this.location = new JSVector(location.x, location.y);;
-  this.velocity = new JSVector(Math.random()*3, Math.random()*3);;
+  this.location = new JSVector(location.x, location.y);
+  this.velocity = new JSVector(Math.random()*3, Math.random()*3);
   this.acceleration = new JSVector(0,0.1);
   this.maxSpeed = 4;
   this.maxForce = 0.1;
@@ -9,10 +9,9 @@ function Vehicle(location){
 }
 
 Vehicle.prototype.run = function(){
-  this.flock(vehicles);
+  this.flock(game.vehicles);
   this.update();
   this.render();
-  //this.seek();
 }
 
 Vehicle.prototype.update = function(){
@@ -23,19 +22,26 @@ Vehicle.prototype.update = function(){
 
 Vehicle.prototype.render = function(){
   let ctx = game.ctx;
-  ctx.fillStyle = "red";
-  ctx.strokeStyle = "red";
-  ctx.lineWidth = 1;
+  ctx.save();
+  ctx.translate(this.location.x, this.location.y);
+  ctx.rotate(this.vel.getDirection());
   ctx.beginPath();
-  ctx.arc(this.location.x, this.location.y, 5, Math.PI * 2, 0, false);
+  ctx.fillStyle = "rgba(255, 75, 25)";
+  ctx.strokeStyle = "rgba(255, 75, 25)";
+  ctx.lineWidth = 1;
+  ctx.moveTo(0, -15);
+  ctx.lineTo(-15, 15);
+  ctx.lineTo(0, 0);
+  ctx.closePath();
   ctx.stroke();
   ctx.fill();
+  ctx.restore();
 }
 
 Vehicle.prototype.flock = function(vehicles){
-  let sep = separate(vehicles);
-  let ali = align(vehicles);
-  let coh = cohesion(vehicles);
+  let sep = this.separate(vehicles);
+  let ali = this.align(vehicles);
+  let coh = this.cohesion(vehicles);
 
   sep.mult(1.5);
   ali.mult(1.0);
