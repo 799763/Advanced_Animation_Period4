@@ -9,7 +9,7 @@ function Vehicle(location){
 }
 
 Vehicle.prototype.run = function(){
-  //this.flock(game.vehicles);
+  this.flock(game.vehicles);
   this.update();
   this.render();
   this.checkEdges();
@@ -56,31 +56,27 @@ Vehicle.prototype.checkEdges = function(){
 }
 
 Vehicle.prototype.flock = function(vehicles){
-  let sep = this.separate(vehicles);
-  //let ali = this.align(vehicles);
-  //let coh = this.cohesion(vehicles);
+  let sep = this.separate(vehicles);//complete
+  let ali = this.align(vehicles);//complete
+  let coh = this.cohesion(vehicles);
 
-  sep.mult(1.5);
-  //ali.mult(1.0);
-  //coh.mult(1.0);
+  sep.multiply(1.5);//complete
+  ali.multiply(1.0);//complet
+  coh.multiply(1.0);
 
-  applyForce(sep);
-  //applyForce(ali);
-  //applyForce(coh);
+  this.acceleration.add(sep);//complete
+  this.acceleration.add(ali);//complete
+  this.acceleration.add(coh);
 }
 
-Vehicle.prototype.applyForce = function(force){
-  this.acceleration.add(force);
-}
-
-Vehicle.prototype.separate = function(vehicles){////
-  let desiredSeparation = 20;
+Vehicle.prototype.separate = function(vehicles){////complete
+  let desiredSeparation = 25;
   let sum = new JSVector(0,0);
+  let dist = new JSVector(0,0);
   for(let i = 0; i < vehicles.length; i++){
-    let diff = new JSVector(0,0);
-    let d = JSVector.distance(this.location, vehicles[i].location);
-    if((d > 0) && (d < this.desiredSeparation)){
-      diff = JSVector.sub(this.location, vehicles[i].location);
+    let diff = JSVector.subGetNew(this.location, vehicles[i].location);
+    dist = diff.getMagnitude();
+    if((dist > 0) && (dist < desiredSeparation)){
       diff.normalize();
       sum.add(diff);
     }
@@ -88,23 +84,25 @@ Vehicle.prototype.separate = function(vehicles){////
   return sum;
 }
 
-Vehicle.prototype.align = function(vehicles){////
+Vehicle.prototype.align = function(vehicles){////complete
   let neighborDistance = 50;
-  let count = 0;
   let sum = new JSVector(0,0);
+  let count = 0;
   for(let i = 0; i < vehicles.length; i++){
-    let d = this.location.distance(vehicle[i].location);
-    if((d > 0) && (d < this.neighborDistance)){
-      sum.add(vehicles.velocity);
+    let dist = this.location.distance(vehicles[i].location);
+    //let dist = JSVector.subGetNew(this.location, vehicles[i].location);
+    if((dist > 0) && (dist < neighborDistance)){
+      sum.add(vehicles[i].velocity);
       count++;
     }
   }
   if(count > 0){
-    sum.div(count);
+    sum.divide(count);
     sum.normalize();
-    sum.mult(maxSpeed);
+    sum.multiply(this.maxSpeed);
     let steer = sum.sub(this.velocity);
-    steer.limit(maxForce);
+    steer.normalize();
+    steer.multiply(1.0);
     return(steer);
   }else{
     return(new JSVector(0,0));
@@ -116,15 +114,15 @@ Vehicle.prototype.cohesion = function(vehicles){////
   let sum = new JSVector(0,0);
   let count = 0;
   for(let i = 0; i < vehicles.length; i++){
-    let d = this.location.distance(vehicles[i].location);
-    if((d > 0) && (d < this.neighborDistance)){
-      sum.add(vehicles.location);
+    let dist = this.location.distance(vehicles[i].location);
+    if((dist > 0) && (dist < this.neighborDistance)){
+      sum.add(vehicles[i].location);
       count++
     }
   }
   //
   if(count > 0){
-    sum.div(count);
+    sum.divide(count);
     return seek(sum);
   }else{
     return(new JSVector(0,0));
@@ -134,8 +132,8 @@ Vehicle.prototype.cohesion = function(vehicles){////
 Vehicle.prototype.seek = function(target){
   let desired = JSVector(0,0);
   desired.normalize();
-  desired.multiply(maxSpeed);
+  desired.multiply(this.maxSpeed);
   let steer = desired.sub(this.vel);
-  steer.limit(maxForce);
+  steer.limit(this.maxForce);
   return steer;
 }
