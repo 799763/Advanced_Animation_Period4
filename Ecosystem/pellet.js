@@ -9,14 +9,16 @@ function Pellet(location){
 }
 
 Pellet.prototype.run = function(){
-  this.flock(game.pellets);
+  this.flock(pelletEmitter.pellets);
   this.update();
   this.render();
   this.checkEdges();
 }
 
 Pellet.prototype.update = function(){
+  this.acceleration.limit(this.maxForce);
   this.velocity.add(this.acceleration);
+  this.acceleration.multiply(0);
   this.velocity.limit(this.maxSpeed);
   this.location.add(this.velocity);
 }
@@ -27,7 +29,7 @@ Pellet.prototype.render = function(){
   ctx.fillStyle = "rgba(255, 255, 255)";
   ctx.strokeStyle = "rgba(255, 255, 255)";
   ctx.lineWidth = 1;
-  ctx.arc(this.location.x, this.location.y, 3, Math.PI * 2, 0, false);
+  ctx.arc(this.location.x, this.location.y, 5, Math.PI * 2, 0, false);
   ctx.stroke();
   ctx.fill();
 }
@@ -49,16 +51,16 @@ Pellet.prototype.checkEdges = function(){
 
 Pellet.prototype.flock = function(pellets){
   let sep = this.separate(pellets);
-//  let ali = this.align(pellets);
-//  let coh = this.cohesion(pellets);
+  let ali = this.align(pellets);
+  let coh = this.cohesion(pellets);
 
-  sep.multiply(1.5);
-//  ali.multiply(1.0);
-//  coh.multiply(1.0);
+  sep.multiply(1.0);
+  ali.multiply(1.5);
+  coh.multiply(1.0);
 
   this.acceleration.add(sep);
-//  this.acceleration.add(ali);
-//  this.acceleration.add(coh);
+  this.acceleration.add(ali);
+  this.acceleration.add(coh);
 }
 
 Pellet.prototype.separate = function(pellets){
