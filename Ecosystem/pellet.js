@@ -9,7 +9,7 @@ function Pellet(location){
 }
 
 Pellet.prototype.run = function(){
-  this.flock(game.vehicles);
+  this.flock(game.pellets);
   this.update();
   this.render();
   this.checkEdges();
@@ -23,22 +23,13 @@ Pellet.prototype.update = function(){
 
 Pellet.prototype.render = function(){
   let ctx = game.ctx;
-  //ctx.save();
-  //ctx.translate(this.location.x, this.location.y);
-  //ctx.rotate(this.velocity.getDirection() + Math.PI/2);
   ctx.beginPath();
-  ctx.fillStyle = "rgba(255, 75, 25)";
-  ctx.strokeStyle = "rgba(255, 75, 25)";
+  ctx.fillStyle = "rgba(255, 255, 255)";
+  ctx.strokeStyle = "rgba(255, 255, 255)";
   ctx.lineWidth = 1;
   ctx.arc(this.location.x, this.location.y, 3, Math.PI * 2, 0, false);
-  // ctx.moveTo(0, -10);
-  // ctx.lineTo(-10, 10);
-  // ctx.lineTo(0, 0);
-  // ctx.lineTo(10, 10);
-  // ctx.closePath();
   ctx.stroke();
   ctx.fill();
-  //ctx.restore();
 }
 
 Pellet.prototype.checkEdges = function(){
@@ -56,29 +47,26 @@ Pellet.prototype.checkEdges = function(){
   }
 }
 
-Pellet.prototype.flock = function(vehicles){
-  let sep = this.separate(vehicles);
-//  let ali = this.align(vehicles);
-//  let coh = this.cohesion(vehicles);
+Pellet.prototype.flock = function(pellets){
+  let sep = this.separate(pellets);
+//  let ali = this.align(pellets);
+//  let coh = this.cohesion(pellets);
 
   sep.multiply(1.5);
 //  ali.multiply(1.0);
 //  coh.multiply(1.0);
-  // sep.multiply(game.slider3.value);
-  // ali.multiply(game.slider4.value);
-  // coh.multiply(game.slider5.value);
 
   this.acceleration.add(sep);
 //  this.acceleration.add(ali);
 //  this.acceleration.add(coh);
 }
 
-Pellet.prototype.separate = function(vehicles){
+Pellet.prototype.separate = function(pellets){
   let desiredSeparation = 25;
   let sum = new JSVector(0,0);
   let dist = new JSVector(0,0);
-  for(let i = 0; i < vehicles.length; i++){
-    let diff = JSVector.subGetNew(this.location, vehicles[i].location);
+  for(let i = 0; i < pellets.length; i++){
+    let diff = JSVector.subGetNew(this.location, pellets[i].location);
     dist = diff.getMagnitude();
     if((dist > 0) && (dist < desiredSeparation)){
       diff.normalize();
@@ -88,15 +76,14 @@ Pellet.prototype.separate = function(vehicles){
   return sum;
 }
 
-Pellet.prototype.align = function(vehicles){
+Pellet.prototype.align = function(pellets){
   let neighborDistance = 50;
   let sum = new JSVector(0,0);
   let count = 0;
-  for(let i = 0; i < vehicles.length; i++){
-    let dist = this.location.distance(vehicles[i].location);
-    //let dist = JSVector.subGetNew(this.location, vehicles[i].location);
+  for(let i = 0; i < pellets.length; i++){
+    let dist = this.location.distance(pellets[i].location);
     if((dist > 0) && (dist < neighborDistance)){
-      sum.add(vehicles[i].velocity);
+      sum.add(pellets[i].velocity);
       count++;
     }
   }
@@ -113,14 +100,14 @@ Pellet.prototype.align = function(vehicles){
   }
 }//end of align function
 
-Pellet.prototype.cohesion = function(vehicles){
+Pellet.prototype.cohesion = function(pellets){
   let neighborDistance = 50;
   let sum = new JSVector(0,0);
   let count = 0;
-  for(let i = 0; i < vehicles.length; i++){
-    let dist = this.location.distance(vehicles[i].location);
+  for(let i = 0; i < pellets.length; i++){
+    let dist = this.location.distance(pellets[i].location);
     if((dist > 0) && (dist < this.neighborDistance)){
-      sum.add(vehicles[i].location);
+      sum.add(pellets[i].location);
       count++
     }
   }

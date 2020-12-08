@@ -9,11 +9,11 @@ function Game(){
     // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D
     this.ctx = this.canvas.getContext('2d'); // This is the context
 
-    this.numVehicles = 20;
-    this.vehicles = [];
-    for(let i = 0; i < this.numVehicles; i++){
+    this.numPellets = 20;
+    this.pellets = [];
+    for(let i = 0; i < this.numPellets; i++){
       let loc = new JSVector(Math.random()*this.canvas.width, Math.random()*this.canvas.height);
-      this.vehicles.push(new Pellet(loc));
+      this.pellets.push(new Pellet(loc));
     }
 
     //  Add event handlers to all tile objects
@@ -38,7 +38,7 @@ function Game(){
 
 // function to run the game each animation cycle
 Game.prototype.run = function(){
-  for(let i = 0; i < this.vehicles.length; i++){
-    this.vehicles[i].run();
+  for(let i = 0; i < this.pellets.length; i++){
+    this.pellets[i].run();
   }
 }
