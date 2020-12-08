@@ -2,8 +2,8 @@ function Vehicle(location){
   this.location = location;
   this.velocity = new JSVector(Math.random()*3, Math.random()*3);
   this.acceleration = new JSVector(0,0);
-  this.maxSpeed = 4;
-  this.maxForce = 0.1;
+  // this.maxSpeed = 4;
+  // this.maxForce = 0.1;
   this.desired = new JSVector(0,0);
   this.steer = new JSVector(0,0);
 }
@@ -17,7 +17,7 @@ Vehicle.prototype.run = function(){
 
 Vehicle.prototype.update = function(){
   this.velocity.add(this.acceleration);
-  this.velocity.limit(this.maxSpeed);
+  this.velocity.limit(game.slider2.value);
   this.location.add(this.velocity);
 }
 
@@ -41,35 +41,52 @@ Vehicle.prototype.render = function(){
 }
 
 Vehicle.prototype.checkEdges = function(){
+  // if(this.location.x < 0){
+  //   this.velocity.x = -this.velocity.x;
+  // }
+  // if(this.location.x > game.canvas.width){
+  //   this.velocity.x = -this.velocity.x;
+  // }
+  // if(this.location.y < 0){
+  //   this.velocity.y = -this.velocity.y;
+  // }
+  // if(this.location.y > game.canvas.height){
+  //   this.velocity.y = -this.velocity.y;
+  // }
+
+
   if(this.location.x < 0){
-    this.velocity.x = -this.velocity.x;
+    this.location.x = game.canvas.width;
   }
-  if(this.location.x > canvas.width){
-    this.velocity.x = -this.velocity.x;
+  if(this.location.x > game.canvas.width){
+    this.location.x = 0;
   }
   if(this.location.y < 0){
-    this.velocity.y = -this.velocity.y;
+    this.location.y = game.canvas.height;
   }
-  if(this.location.y > canvas.height){
-    this.velocity.y = -this.velocity.y;
+  if(this.location.y > game.canvas.height){
+    this.location.y = 0;
   }
 }
 
 Vehicle.prototype.flock = function(vehicles){
-  let sep = this.separate(vehicles);//complete
-  let ali = this.align(vehicles);//complete
+  let sep = this.separate(vehicles);
+  let ali = this.align(vehicles);
   let coh = this.cohesion(vehicles);
 
-  sep.multiply(1.5);//complete
-  ali.multiply(1.0);//complet
-  coh.multiply(1.0);
+  // sep.multiply(1.5);
+  // ali.multiply(1.0);
+  // coh.multiply(1.0);
+  sep.multiply(game.slider3.value);
+  ali.multiply(game.slider4.value);
+  coh.multiply(game.slider5.value);
 
-  this.acceleration.add(sep);//complete
-  this.acceleration.add(ali);//complete
+  this.acceleration.add(sep);
+  this.acceleration.add(ali);
   this.acceleration.add(coh);
 }
 
-Vehicle.prototype.separate = function(vehicles){////complete
+Vehicle.prototype.separate = function(vehicles){
   let desiredSeparation = 25;
   let sum = new JSVector(0,0);
   let dist = new JSVector(0,0);
@@ -84,7 +101,7 @@ Vehicle.prototype.separate = function(vehicles){////complete
   return sum;
 }
 
-Vehicle.prototype.align = function(vehicles){////complete
+Vehicle.prototype.align = function(vehicles){
   let neighborDistance = 50;
   let sum = new JSVector(0,0);
   let count = 0;
@@ -99,7 +116,7 @@ Vehicle.prototype.align = function(vehicles){////complete
   if(count > 0){
     sum.divide(count);
     sum.normalize();
-    sum.multiply(this.maxSpeed);
+    sum.multiply(game.slider2.value);
     let steer = sum.sub(this.velocity);
     steer.normalize();
     steer.multiply(1.0);
@@ -109,7 +126,7 @@ Vehicle.prototype.align = function(vehicles){////complete
   }
 }//end of align function
 
-Vehicle.prototype.cohesion = function(vehicles){////
+Vehicle.prototype.cohesion = function(vehicles){
   let neighborDistance = 50;
   let sum = new JSVector(0,0);
   let count = 0;
@@ -132,8 +149,8 @@ Vehicle.prototype.cohesion = function(vehicles){////
 Vehicle.prototype.seek = function(target){
   let desired = JSVector(0,0);
   desired.normalize();
-  desired.multiply(this.maxSpeed);
+  desired.multiply(game.slider2.value);
   let steer = desired.sub(this.vel);
-  steer.limit(this.maxForce);
+  steer.limit(game.slider1.value);
   return steer;
 }
