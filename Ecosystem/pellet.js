@@ -3,7 +3,7 @@ function Pellet(location){
   this.velocity = new JSVector(Math.random()*3, Math.random()*3);
   this.acceleration = new JSVector(0,0);
   this.maxSpeed = 2;
-  this.maxForce = 0.1;
+  this.maxForce = 2;
   this.desired = new JSVector(0,0);
   this.steer = new JSVector(0,0);
 }

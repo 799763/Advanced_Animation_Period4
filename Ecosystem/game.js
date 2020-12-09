@@ -9,16 +9,16 @@ function Game(){
     // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D
     this.ctx = this.canvas.getContext('2d'); // This is the context
 
-    // this.numPellets = 20;
-    // this.pellets = [];
-    // for(let i = 0; i < this.numPellets; i++){
-    //   let loc = new JSVector(Math.random()*this.canvas.width, Math.random()*this.canvas.height);
-    //   this.pellets.push(new Pellet(loc));
-    // }
+    this.numPellets = 20;
+    this.pellets = [];
+    for(let i = 0; i < this.numPellets; i++){
+      let loc = new JSVector(Math.random()*this.canvas.width, Math.random()*this.canvas.height);
+      this.pellets.push(new Pellet(loc));
+    }
     //===============
     //===============
-    this.pelletSystem = [];
-    this.pelletSystem.push(new PelletEmitter());
+    // this.pelletSystem = [];
+    // this.pelletSystem.push(new PelletEmitter());
 
     //  Add event handlers to all tile objects
     for(let i = 0; i < this.ga.tiles.length; i++){
@@ -42,10 +42,10 @@ function Game(){
 
 // function to run the game each animation cycle
 Game.prototype.run = function(){
-  // for(let i = 0; i < this.pellets.length; i++){
-  //   //this.pellets[i].run();
-  // }
-  for(let i = 0; i < this.pelletSystem.length; i++){
-    this.pelletSystem[i].run();
+  for(let i = 0; i < this.pellets.length; i++){
+    this.pellets[i].run();
   }
+  // for(let i = 0; i < this.pelletSystem.length; i++){
+  //   this.pelletSystem[i].run();
+  // }
 }
