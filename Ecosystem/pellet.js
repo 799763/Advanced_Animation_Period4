@@ -25,14 +25,31 @@ Pellet.prototype.update = function(){
 }
 
 Pellet.prototype.render = function(){
+  // let ctx = game.ctx;
+  // ctx.beginPath();
+  // ctx.fillStyle = "rgba(255, 255, 255)";
+  // ctx.strokeStyle = "rgba(255, 255, 255)";
+  // ctx.lineWidth = 1;
+  // ctx.arc(this.location.x, this.location.y, 5, Math.PI * 2, 0, false);
+  // ctx.stroke();
+  // ctx.fill();
   let ctx = game.ctx;
+  ctx.save();
+  ctx.translate(this.location.x, this.location.y);
+  ctx.rotate(this.velocity.getDirection() + Math.PI/2);
   ctx.beginPath();
-  ctx.fillStyle = "rgba(255, 255, 255)";
-  ctx.strokeStyle = "rgba(255, 255, 255)";
+  ctx.fillStyle = "rgba(255, 75, 25)";
+  ctx.strokeStyle = "rgba(255, 75, 25)";
   ctx.lineWidth = 1;
+  // ctx.moveTo(0, -10);
+  // ctx.lineTo(-10, 10);
+  // ctx.lineTo(0, 0);
+  // ctx.lineTo(10, 10);
   ctx.arc(this.location.x, this.location.y, 5, Math.PI * 2, 0, false);
+  ctx.closePath();
   ctx.stroke();
   ctx.fill();
+  ctx.restore();
 }
 
 Pellet.prototype.checkEdges = function(){
@@ -109,7 +126,7 @@ Pellet.prototype.cohesion = function(pellets){
   let count = 0;
   for(let i = 0; i < pellets.length; i++){
     let dist = this.location.distance(pellets[i].location);
-    if((dist > 0) && (dist < this.neighborDistance)){
+    if((dist > 0) && (dist < neighborDistance)){//deleted "this"
       sum.add(pellets[i].location);
       count++
     }
