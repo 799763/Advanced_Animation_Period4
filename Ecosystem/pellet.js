@@ -2,14 +2,14 @@ function Pellet(location){
   this.location = location;
   this.velocity = new JSVector(Math.random()*3, Math.random()*3);
   this.acceleration = new JSVector(0,0);
-  this.maxSpeed = 2;
+  this.maxSpeed = 1;
   this.maxForce = 2;
   this.desired = new JSVector(0,0);
   this.steer = new JSVector(0,0);
 }
 
 Pellet.prototype.run = function(){
-  this.flock(pelletEmitter.pellets);
+  this.flock(game.pellets);
   this.update();
   this.render();
   this.checkEdges();
@@ -20,6 +20,7 @@ Pellet.prototype.update = function(){
   this.velocity.add(this.acceleration);
   this.acceleration.multiply(0);
   this.velocity.limit(this.maxSpeed);
+  this.velocity.normalize();//need this here or else speed goes crazy
   this.location.add(this.velocity);
 }
 

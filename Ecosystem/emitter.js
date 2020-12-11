@@ -1,4 +1,4 @@
-function PelletEmitter(){
+function Emitter(){
   this.location = new JSVector(Math.random()*1096, Math.random()*696);
   this.pellets = [];
   for(let i = 0; i < 25; i++){//creates new pellets
@@ -6,7 +6,7 @@ function PelletEmitter(){
   }
 }
 
-PelletEmitter.prototype.render = function(){
+Emitter.prototype.render = function(){
   let ctx = game.ctx;
   ctx.beginPath();
   ctx.fillStyle = "rgba(255, 255, 255)";
@@ -17,7 +17,7 @@ PelletEmitter.prototype.render = function(){
   ctx.fill();
 }
 
-PelletEmitter.prototype.run = function(){//runs the pellets
+Emitter.prototype.run = function(){//runs the pellets
   for(let i = 0; i < this.pellets.length-1; i++){
     this.pellets[i].run();
   }
