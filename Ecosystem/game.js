@@ -15,12 +15,38 @@ function Game(){
       let loc = new JSVector(Math.random()*this.canvas.width, Math.random()*this.canvas.height);
       this.pellets.push(new Pellet(loc));
     }
-
     this.pacMan = new Pacman();
-    this.ghost = new Ghost();
-    //this.pacMan = new Pacman();
-    //===============
-    //===============
+    this.ghosts = [];
+    //Blinky code
+    this.r = 255;
+    this.g = 0;
+    this.b = 0;
+    this.clr = "rgba("+ this.r +"," + this.g +"," + this.b +")";
+    this.blinky = new Ghost(this.clr)
+    this.ghosts.push(this.blinky);
+    //clyde code
+    this.r = 255;
+    this.g = 165;
+    this.b = 0;
+    this.clr = "rgba("+ this.r +"," + this.g +"," + this.b +")";
+    this.clyde = new Ghost(this.clr)
+    this.ghosts.push(this.clyde);
+    //inky code
+    this.r = 0;
+    this.g = 255;
+    this.b = 255;
+    this.clr = "rgba("+ this.r +"," + this.g +"," + this.b +")";
+    this.inky = new Ghost(this.clr)
+    this.ghosts.push(this.inky);
+    //pinky code
+    this.r = 255;
+    this.g = 0;
+    this.b = 0;
+    this.clr = "rgba("+ this.r +"," + this.g +"," + this.b +")";
+    this.pinky = new Ghost(this.clr)
+    this.ghosts.push(this.pinky);
+
+
     // this.pelletSystem = [];
     // this.pelletSystem.push(new PelletEmitter());
 
@@ -49,9 +75,10 @@ Game.prototype.run = function(){
   for(let i = 0; i < this.pellets.length; i++){
     this.pellets[i].run();
   }
+  for(let i = 0; i < this.ghosts.length; i++){
+    this.ghosts[i].run();
+  }
   this.pacMan.run();
-  this.ghost.run();
-  //this.pacMan.run();
   // for(let i = 0; i < this.pelletSystem.length; i++){
   //   this.pelletSystem[i].run();
   // }

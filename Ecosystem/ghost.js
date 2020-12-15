@@ -1,5 +1,6 @@
-function Ghost(){
-  this.location = new JSVector(500,500); //Only temporary, will be changed
+function Ghost(color){
+  this.color = color;
+  this.location = new JSVector(Math.random()*500,Math.random()*500); //Only temporary, will be changed
   this.velocity = new JSVector(0,0);
   this.acceleration = new JSVector(Math.random()*3, Math.random()*3);
 }
@@ -12,15 +13,14 @@ Ghost.prototype.run = function(){
 }
 
 Ghost.prototype.update = function(){
-  let dist = this.location.distance(game.ghost.location);
-  if(dist < 200){
-    this.accelaration = JSVector.subGetNew(game.ghost.location, game.ghost.location);
-  }
+  // let dist = this.location.distance(game.pacMan.location);
+  // // if(dist < 200){
+  // //   this.accelaration = JSVector.subGetNew(game.panMan.location, game.pacMan.location);
+  // // }
   this.acceleration.normalize();
   this.acceleration.multiply(0.5);
   this.velocity.add(this.acceleration);
   this.velocity.limit(2);
-
   this.location.add(this.velocity);
 }
 
@@ -53,7 +53,7 @@ Ghost.prototype.checkEdges = function(){
 Ghost.prototype.render = function(){
   let ctx = game.ctx;
   //======= BODY =======
-  ctx.fillStyle = 'red';
+  ctx.fillStyle = this.color;
   ctx.beginPath();
   ctx.moveTo(83, 116);
   ctx.lineTo(83, 102);

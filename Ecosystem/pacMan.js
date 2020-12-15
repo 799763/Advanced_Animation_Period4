@@ -9,13 +9,19 @@ Pacman.prototype.run = function(){
   this.update();
   this.checkEdges();
   this.separate();
-  this.seek();
+  this.seek(game.pelletSystem);
 }
 
 Pacman.prototype.update = function(){
-  let dist = this.location.distance(game.ghost.location);
-  if(dist < 200){
-    this.accelaration = JSVector.subGetNew(this.location, this.ghost.location);
+  for(let i = 0; i < 4; i++){
+    let dist = this.location.distance(game.ghosts[i].location);
+    let pelletDist = this.location.distance(game.ghosts[i].location);
+    if(dist < 200){
+      this.acceleration = JSVector.subGetNew(this.location, game.ghosts[i].location);
+    }
+    if(pelletDist < 150){
+      this.acceleration = JSVector.subGetNew(game.ghosts[i].location, this.location);
+    }
   }
   this.acceleration.normalize();
   this.acceleration.multiply(0.5);
@@ -25,8 +31,14 @@ Pacman.prototype.update = function(){
   this.location.add(this.velocity);
 }
 
-Pacman.prototype.seek = function(){//hunts pellets
-
+//Edit in the morning
+Pacman.prototype.seek = function(target){//hunts pellets
+  let location = JSVector(0,0);
+  this.location.normalize();
+  this.location.multiply(0.5);
+  let steer = this.location.sub(this.velocity);
+  steer.limit(2);
+  return(steer);
 }
 
 Pacman.prototype.checkEdges = function(){
