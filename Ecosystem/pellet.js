@@ -58,15 +58,15 @@ Pellet.prototype.checkEdges = function(){
 Pellet.prototype.flock = function(pellets){
   let sep = this.separate(pellets);
   let ali = this.align(pellets);
-  let coh = this.cohesion(pellets);
+  //let coh = this.cohesion(pellets);
 
   sep.multiply(1.0);
   ali.multiply(1.5);
-  coh.multiply(1.0);
+//  coh.multiply(1.0);
 
   this.acceleration.add(sep);
   this.acceleration.add(ali);
-  this.acceleration.add(coh);
+  //this.acceleration.add(coh);
 }
 
 Pellet.prototype.separate = function(pellets){
@@ -108,31 +108,31 @@ Pellet.prototype.align = function(pellets){
   }
 }//end of align function
 
-Pellet.prototype.cohesion = function(pellets){
-  let neighborDistance = 100;
-  let sum = new JSVector(0,0);
-  let count = 0;
-  for(let i = 0; i < pellets.length; i++){
-    let dist = this.location.distance(pellets[i].location);
-    if(dist < neighborDistance){
-      sum.add(pellets[i].location);
-      count++
-    }
-  }
-  //
-  if(count > 0){
-    sum.divide(count);
-    return seek(sum); // adjust code here
-  }else{
-    return(new JSVector(0,0));
-  }
-}//end of cohesion functoin
-
-Pellet.prototype.seek = function(target){
-  let desired = JSVector.subGetNew(target, this.location);
-  desired.normalize();
-  desired.multiply(this.maxSpeed);
-  let steer = desired.sub(this.vel);
-  //steer.limit(this.maxForce);
-  return steer;
-}
+// Pellet.prototype.cohesion = function(pellets){
+//   let neighborDistance = 100;
+//   let sum = new JSVector(0,0);
+//   let count = 0;
+//   for(let i = 0; i < pellets.length; i++){
+//     let dist = this.location.distance(pellets[i].location);
+//     if(dist < neighborDistance){
+//       sum.add(pellets[i].location);
+//       count++
+//     }
+//   }
+//   //
+//   if(count > 0){
+//     sum.divide(count);
+//     return seek(sum);
+//   }else{
+//     return(new JSVector(0,0));
+//   }
+// }//end of cohesion functoin
+//
+// Pellet.prototype.seek = function(target){
+//   let desired = JSVector.subGetNew(target, this.location);
+//   desired.normalize();
+//   desired.multiply(this.maxSpeed);
+//   let steer = desired.sub(this.vel);
+//   //steer.limit(this.maxForce);
+//   return steer;
+// }

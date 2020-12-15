@@ -1,5 +1,5 @@
 function Pacman(){
-  this.location = new JSVector(500,500); //Only temporary, will be changed
+  this.location = new JSVector(Math.random()*300, Math.random()*300); //Only temporary, will be changed
   this.acceleration = new JSVector(0,0);
   this.velocity = new JSVector(Math.random()*3, Math.random()*3);
 }
@@ -8,19 +8,19 @@ Pacman.prototype.run = function(){
   this.render();
   this.update();
   this.checkEdges();
-  this.separate();
-  this.seek(game.pelletSystem);
 }
 
 Pacman.prototype.update = function(){
   for(let i = 0; i < 4; i++){
     let dist = this.location.distance(game.ghosts[i].location);
-    let pelletDist = this.location.distance(game.ghosts[i].location);
-    if(dist < 200){
+    if(dist < 50){
       this.acceleration = JSVector.subGetNew(this.location, game.ghosts[i].location);
     }
-    if(pelletDist < 150){
-      this.acceleration = JSVector.subGetNew(game.ghosts[i].location, this.location);
+  }
+  for(let i = 0; i < game.pellets.length; i++){
+    let pelletDist = this.location.distance(game.pellets[i].location);
+    if(pelletDist > 50){
+      this.acceleration = JSVector.subGetNew(game.pellets[i].location, this.location);
     }
   }
   this.acceleration.normalize();
@@ -29,16 +29,6 @@ Pacman.prototype.update = function(){
   this.velocity.limit(2);
 
   this.location.add(this.velocity);
-}
-
-//Edit in the morning
-Pacman.prototype.seek = function(target){//hunts pellets
-  let location = JSVector(0,0);
-  this.location.normalize();
-  this.location.multiply(0.5);
-  let steer = this.location.sub(this.velocity);
-  steer.limit(2);
-  return(steer);
 }
 
 Pacman.prototype.checkEdges = function(){
@@ -56,17 +46,24 @@ Pacman.prototype.checkEdges = function(){
   }
 }
 
-Pacman.prototype.separate = function(){
-
-}
-
 Pacman.prototype.render = function(){
   let ctx = game.ctx;
+  ctx.save();/////
+  ctx.translate(this.location.x, this.location.y);/////
   ctx.beginPath();
   ctx.fillStyle = "rgba(255, 255, 0)";
   ctx.strokeStyle = "rgba(255, 255, 0)";
+
+  //===Without Mouth===
   ctx.lineWidth = 1;
-  ctx.arc(this.location.x, this.location.y, 17, Math.PI * 2, 0, false);
+  ctx.arc(0, 0, 17, Math.PI * 2, 0, false);
   ctx.stroke();
+  //ctx.rotate(this.velocity.getDirection());
+
+  //=== With Mouth===
+  // ctx.arc(37, 37, 13, Math.PI / 7, -Math.PI / 7, false);
+  // ctx.lineTo(31, 37);
+
   ctx.fill();
+  ctx.restore();/////
 }

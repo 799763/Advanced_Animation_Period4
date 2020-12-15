@@ -9,13 +9,17 @@ function Game(){
     // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D
     this.ctx = this.canvas.getContext('2d'); // This is the context
 
+
     this.numPellets = 20;
     this.pellets = [];
     for(let i = 0; i < this.numPellets; i++){
       let loc = new JSVector(Math.random()*this.canvas.width, Math.random()*this.canvas.height);
       this.pellets.push(new Pellet(loc));
     }
+
     this.pacMan = new Pacman();
+
+
     this.ghosts = [];
     //Blinky code
     this.r = 255;
@@ -40,8 +44,8 @@ function Game(){
     this.ghosts.push(this.inky);
     //pinky code
     this.r = 255;
-    this.g = 0;
-    this.b = 0;
+    this.g = 192;
+    this.b = 203;
     this.clr = "rgba("+ this.r +"," + this.g +"," + this.b +")";
     this.pinky = new Ghost(this.clr)
     this.ghosts.push(this.pinky);
@@ -75,7 +79,7 @@ Game.prototype.run = function(){
   for(let i = 0; i < this.pellets.length; i++){
     this.pellets[i].run();
   }
-  for(let i = 0; i < this.ghosts.length; i++){
+  for(let i = 0; i < 4; i++){
     this.ghosts[i].run();
   }
   this.pacMan.run();

@@ -1,6 +1,6 @@
 function Ghost(color){
   this.color = color;
-  this.location = new JSVector(Math.random()*500,Math.random()*500); //Only temporary, will be changed
+  this.location = new JSVector(Math.random()*500, Math.random()*500); //Only temporary, will be changed
   this.velocity = new JSVector(0,0);
   this.acceleration = new JSVector(Math.random()*3, Math.random()*3);
 }
@@ -13,10 +13,10 @@ Ghost.prototype.run = function(){
 }
 
 Ghost.prototype.update = function(){
-  // let dist = this.location.distance(game.pacMan.location);
-  // // if(dist < 200){
-  // //   this.accelaration = JSVector.subGetNew(game.panMan.location, game.pacMan.location);
-  // // }
+  let dist = this.location.distance(game.pacMan.location);
+  if(dist < game.pacMan.location){
+    this.accelaration = JSVector.subGetNew(this.pacMan.location, game.pacMan.location);
+  }
   this.acceleration.normalize();
   this.acceleration.multiply(0.5);
   this.velocity.add(this.acceleration);
@@ -26,7 +26,7 @@ Ghost.prototype.update = function(){
 
 Ghost.prototype.seek = function(){//look for Pacman
   let dist = this.location.distance(game.pacMan.location);
-  if(dist > 200){
+  if(dist > 5){
     this.acceleration = JSVector.subGetNew(game.pacMan.location, this.location);
   }
   this.acceleration.normalize();
@@ -53,6 +53,9 @@ Ghost.prototype.checkEdges = function(){
 Ghost.prototype.render = function(){
   let ctx = game.ctx;
   //======= BODY =======
+  ctx.save();/////
+  ctx.translate(this.location.x, this.location.y);/////
+
   ctx.fillStyle = this.color;
   ctx.beginPath();
   ctx.moveTo(83, 116);
@@ -67,7 +70,10 @@ Ghost.prototype.render = function(){
   ctx.lineTo(87.666, 111.333);
   ctx.lineTo(83, 116);
   ctx.fill()
+  ctx.restore();/////
   //======= EYES =======
+  ctx.save()/////
+  ctx.translate(this.location.x, this.location.y);////
   ctx.fillStyle = 'white';
   ctx.beginPath();
   ctx.moveTo(91, 96);
@@ -81,4 +87,5 @@ Ghost.prototype.render = function(){
   ctx.bezierCurveTo(106, 106, 107, 103, 107, 101);
   ctx.bezierCurveTo(107, 99, 106, 96, 103, 96);
   ctx.fill();
+  ctx.restore();/////
 }
