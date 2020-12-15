@@ -15,6 +15,10 @@ function Game(){
       let loc = new JSVector(Math.random()*this.canvas.width, Math.random()*this.canvas.height);
       this.pellets.push(new Pellet(loc));
     }
+
+    this.pacMan = new Pacman();
+    this.ghost = new Ghost();
+    //this.pacMan = new Pacman();
     //===============
     //===============
     // this.pelletSystem = [];
@@ -45,6 +49,9 @@ Game.prototype.run = function(){
   for(let i = 0; i < this.pellets.length; i++){
     this.pellets[i].run();
   }
+  this.pacMan.run();
+  this.ghost.run();
+  //this.pacMan.run();
   // for(let i = 0; i < this.pelletSystem.length; i++){
   //   this.pelletSystem[i].run();
   // }

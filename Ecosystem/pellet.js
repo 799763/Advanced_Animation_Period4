@@ -2,8 +2,8 @@ function Pellet(location){
   this.location = location;
   this.velocity = new JSVector(Math.random()*3, Math.random()*3);
   this.acceleration = new JSVector(0,0);
-  this.maxSpeed = 1;
-  this.maxForce = 2;
+  this.maxSpeed = 2;
+  this.maxForce = 0.1;
   this.desired = new JSVector(0,0);
   this.steer = new JSVector(0,0);
 }
@@ -20,32 +20,20 @@ Pellet.prototype.update = function(){
   this.velocity.add(this.acceleration);
   this.acceleration.multiply(0);
   this.velocity.limit(this.maxSpeed);
-  this.velocity.normalize();//need this here or else speed goes crazy
+  //this.velocity.normalize();
   this.location.add(this.velocity);
 }
 
 Pellet.prototype.render = function(){
-  // let ctx = game.ctx;
-  // ctx.beginPath();
-  // ctx.fillStyle = "rgba(255, 255, 255)";
-  // ctx.strokeStyle = "rgba(255, 255, 255)";
-  // ctx.lineWidth = 1;
-  // ctx.arc(this.location.x, this.location.y, 5, Math.PI * 2, 0, false);
-  // ctx.stroke();
-  // ctx.fill();
   let ctx = game.ctx;
   ctx.save();
   ctx.translate(this.location.x, this.location.y);
   ctx.rotate(this.velocity.getDirection() + Math.PI/2);
   ctx.beginPath();
-  ctx.fillStyle = "rgba(255, 75, 25)";
-  ctx.strokeStyle = "rgba(255, 75, 25)";
+  ctx.fillStyle = "rgba(255, 255, 255)";
+  ctx.strokeStyle = "rgba(255, 255, 255)";
   ctx.lineWidth = 1;
-  // ctx.moveTo(0, -10);
-  // ctx.lineTo(-10, 10);
-  // ctx.lineTo(0, 0);
-  // ctx.lineTo(10, 10);
-  ctx.arc(this.location.x, this.location.y, 5, Math.PI * 2, 0, false);
+  ctx.arc(0, 0, 5, Math.PI * 2, 0, false);
   ctx.closePath();
   ctx.stroke();
   ctx.fill();
@@ -121,12 +109,12 @@ Pellet.prototype.align = function(pellets){
 }//end of align function
 
 Pellet.prototype.cohesion = function(pellets){
-  let neighborDistance = 50;
+  let neighborDistance = 100;
   let sum = new JSVector(0,0);
   let count = 0;
   for(let i = 0; i < pellets.length; i++){
     let dist = this.location.distance(pellets[i].location);
-    if((dist > 0) && (dist < neighborDistance)){//deleted "this"
+    if(dist < neighborDistance){
       sum.add(pellets[i].location);
       count++
     }
@@ -134,17 +122,17 @@ Pellet.prototype.cohesion = function(pellets){
   //
   if(count > 0){
     sum.divide(count);
-    return seek(sum);
+    return seek(sum); // adjust code here
   }else{
     return(new JSVector(0,0));
   }
 }//end of cohesion functoin
 
 Pellet.prototype.seek = function(target){
-  let desired = JSVector(0,0);
+  let desired = JSVector.subGetNew(target, this.location);
   desired.normalize();
   desired.multiply(this.maxSpeed);
   let steer = desired.sub(this.vel);
-  steer.limit(this.maxForce);
+  //steer.limit(this.maxForce);
   return steer;
 }

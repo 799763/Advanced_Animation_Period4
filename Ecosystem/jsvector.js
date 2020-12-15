@@ -83,7 +83,7 @@ JSVector.prototype.normalize = function(){
 JSVector.prototype.limit = function(lim){
   let mag = this.getMagnitude();
   if(mag > lim){
-    mag = lim;
+    this.setMagnitude(lim);
   }
   return(this);
 }
