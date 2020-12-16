@@ -1,13 +1,12 @@
 function Ghost(color){
   this.color = color;
-  this.location = new JSVector(Math.random()*500, Math.random()*500); //Only temporary, will be changed
+  this.location = new JSVector(Math.random()*500, Math.random()*500);
   this.velocity = new JSVector(0,0);
   this.acceleration = new JSVector(Math.random()*3, Math.random()*3);
 }
 
 Ghost.prototype.run = function(){
   this.update();
-  this.seek();
   this.checkEdges();
   this.render();
 }
@@ -17,22 +16,15 @@ Ghost.prototype.update = function(){
   if(dist < game.pacMan.location){
     this.accelaration = JSVector.subGetNew(this.pacMan.location, game.pacMan.location);
   }
-  this.acceleration.normalize();
-  this.acceleration.multiply(0.5);
-  this.velocity.add(this.acceleration);
-  this.velocity.limit(2);
-  this.location.add(this.velocity);
-}
-
-Ghost.prototype.seek = function(){//look for Pacman
-  let dist = this.location.distance(game.pacMan.location);
-  if(dist > 5){
+  let dist2 = this.location.distance(game.pacMan.location);
+  if(dist2 > 5){
     this.acceleration = JSVector.subGetNew(game.pacMan.location, this.location);
   }
   this.acceleration.normalize();
   this.acceleration.multiply(0.5);
   this.velocity.add(this.acceleration);
   this.velocity.limit(2);
+  this.location.add(this.velocity);
 }
 
 Ghost.prototype.checkEdges = function(){

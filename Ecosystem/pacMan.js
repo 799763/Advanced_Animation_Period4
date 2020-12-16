@@ -1,5 +1,5 @@
 function Pacman(){
-  this.location = new JSVector(Math.random()*300, Math.random()*300); //Only temporary, will be changed
+  this.location = new JSVector(Math.random()*300, Math.random()*300);
   this.acceleration = new JSVector(0,0);
   this.velocity = new JSVector(Math.random()*3, Math.random()*3);
 }
