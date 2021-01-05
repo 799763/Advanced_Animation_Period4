@@ -5,7 +5,7 @@ function Game(){
     this.canvas2 = document.getElementById('cnv2');
     this.context2 = this.canvas2.getContext('2d');
 
-    this.canvas1Loc = new JSVector();
+    this.canvas1Loc = new JSVector(0,0);
 
     this.world = {
         top: -1500,
@@ -60,11 +60,12 @@ Game.prototype.run = function(){
     ctx2.fillRect(0,0,cnv2.width,cnv2.height);
 
     // translate canvas1 according to the location of the canvas in the world
-
+    ctx1.save();
+    ctx1.translate(-canvas.loc.x, -canvas.loc.y);
     // draw the bounds of the world in canvas1
 
     // draw the x and y axes of the world in canvas1
-
+    ctx1.lineTo();
     // scale canvas2 to contain the entire world
 
     // center the world in canvas2
