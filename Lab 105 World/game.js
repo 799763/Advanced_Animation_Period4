@@ -62,6 +62,7 @@ Game.prototype.run = function(){
     // translate canvas1 according to the location of the canvas in the world
     ctx1.save();
     ctx1.translate(-canvas.loc.x, -canvas.loc.y);
+    ctx1.restore();
     // draw the bounds of the world in canvas1
 
     // draw the x and y axes of the world in canvas1
@@ -74,7 +75,6 @@ Game.prototype.run = function(){
     // center the world in canvas2
 
     // draw the x and y axes of the world
-
 
     // draw the outline of canvas1 in canvas2
 
