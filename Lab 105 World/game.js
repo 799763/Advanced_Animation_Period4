@@ -59,26 +59,55 @@ Game.prototype.run = function(){
     ctx2.fillStyle =  "#505050";
     ctx2.fillRect(0,0,cnv2.width,cnv2.height);
 
-    // translate canvas1 according to the location of the canvas in the world
-    ctx1.save();
-    ctx1.translate(-canvas.loc.x, -canvas.loc.y);
-    ctx1.restore();
-    // draw the bounds of the world in canvas1
+    // translate canvas1 according to the location of the canvas in the world=====
+    //
+    //
+    // ctx1.save();
+    // ctx1.translate(-this.cnv1.location.x, -this.cnv1.location.y);
+    // ctx1.restore();
+    //
+    //
 
-    // draw the x and y axes of the world in canvas1
+    // draw the bounds of the world in canvas1=====
+
+    // draw the x and y axes of the world in canvas1=====
+    //=========--Y axis--=========
     ctx1.beginPath();
     ctx1.moveTo(cnv1.width/2, cnv1.height);
-    ctx1.lineTo(cnvs1.width/2, cnv1.height - 50);
+    ctx1.lineTo(cnv1.width/2, cnv1.height - 600);
+    ctx1.strokeStyle = "rgba(255, 25, 25)";
     ctx1.stroke();
-    // scale canvas2 to contain the entire world
+    //=========--X axis--=========
+    ctx1.beginPath();
+    ctx1.moveTo(cnv1.width, cnv1.height/2);
+    ctx1.lineTo(0,cnv1.height/2);
+    ctx1.strokeStyle = "rgba(255, 25, 25)";
+    ctx1.stroke();
 
-    // center the world in canvas2
+    // scale canvas2 to contain the entire world=====
+    ctx2.scale(10,1);
 
-    // draw the x and y axes of the world
+    // center the world in canvas2=====
+    ctx1.translate(0,0);
 
-    // draw the outline of canvas1 in canvas2
-
-    // run all the actors
+    // draw the x and y axes of the world=====
+    //=========--Y axis--=========
+    ctx1.beginPath();
+    ctx1.moveTo(cnv2.width/2, cnv2.height);
+    ctx1.lineTo(cnv2.width/2, cnv2.height - 600);
+    ctx1.strokeStyle = "rgba(255, 25, 25)";
+    ctx1.stroke();
+    //=========--X axis--=========
+    ctx1.beginPath();
+    ctx1.moveTo(cnv2.width, cnv2.height/2);
+    ctx1.lineTo(0,cnv2.height/2);
+    ctx1.strokeStyle = "rgba(255, 25, 25)";
+    ctx1.stroke();
+    // draw the outline of canvas1 in canvas2=====
+    ctx2.beginPath(ctx1.width, ctx1.height);
+    ctx2.lineTo(ctx1.height/2, ctx1.width/2);
+    ctx2.strokeStyle = "rgba(25, 255, 255)";
+    // run all the actors=====
 
 
 }
