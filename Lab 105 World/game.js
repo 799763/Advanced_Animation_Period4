@@ -20,7 +20,6 @@ function Game(){
     // so that the entire world fits within canvas2
     this.scaleX = this.canvas2.width/this.world.width;
     this.scaleY = this.canvas2.height/this.world.height;
-
     // add an event handler such that the a, s, w, d keys
     // will reposition the canvas within the world.
     window.addEventListener("keypress", function(event){
@@ -58,56 +57,50 @@ Game.prototype.run = function(){
     ctx1.fillRect(0,0,cnv1.width,cnv1.height);
     ctx2.fillStyle =  "#505050";
     ctx2.fillRect(0,0,cnv2.width,cnv2.height);
+    ctx1.save();
+    ctx2.save();
 
     // translate canvas1 according to the location of the canvas in the world=====
-    //
-    //
-    // ctx1.save();
-    // ctx1.translate(-this.cnv1.location.x, -this.cnv1.location.y);
-    // ctx1.restore();
-    //
-    //
-
+    ctx1.translate(-this.canvas1Loc.x, -this.canvas1Loc.y);
     // draw the bounds of the world in canvas1=====
-
+    ctx1.strokeStyle = "green";
+    ctx1.lineWidth = 3;
+    ctx1.strokeRect(this.world.left, this.world.top, this.world.width, this.world.height);
     // draw the x and y axes of the world in canvas1=====
-    //=========--Y axis--=========
     ctx1.beginPath();
-    ctx1.moveTo(cnv1.width/2, cnv1.height);
-    ctx1.lineTo(cnv1.width/2, cnv1.height - 600);
-    ctx1.strokeStyle = "rgba(255, 25, 25)";
-    ctx1.stroke();
-    //=========--X axis--=========
-    ctx1.beginPath();
-    ctx1.moveTo(cnv1.width, cnv1.height/2);
-    ctx1.lineTo(0,cnv1.height/2);
-    ctx1.strokeStyle = "rgba(255, 25, 25)";
+    ctx1.moveTo(this.world.left,0);//y-axis
+    ctx1.lineTo(this.world.right,0);
+    ctx1.moveTo(0,this.world.top);//x-axis
+    ctx1.lineTo(0,this.world.bottom);
+    ctx1.lineWidth = 3;
+    ctx1.strokeStyle = "red";
     ctx1.stroke();
 
     // scale canvas2 to contain the entire world=====
-    ctx2.scale(10,1);
+    ctx2.scale(this.scaleX,this.scaleY);
 
     // center the world in canvas2=====
-    ctx1.translate(0,0);
+    ctx2.translate(this.world.width/2,this.world.height/2);
 
     // draw the x and y axes of the world=====
-    //=========--Y axis--=========
-    ctx1.beginPath();
-    ctx1.moveTo(cnv2.width/2, cnv2.height);
-    ctx1.lineTo(cnv2.width/2, cnv2.height - 600);
-    ctx1.strokeStyle = "rgba(255, 25, 25)";
-    ctx1.stroke();
-    //=========--X axis--=========
-    ctx1.beginPath();
-    ctx1.moveTo(cnv2.width, cnv2.height/2);
-    ctx1.lineTo(0,cnv2.height/2);
-    ctx1.strokeStyle = "rgba(255, 25, 25)";
-    ctx1.stroke();
+    ctx2.beginPath();
+    ctx2.moveTo(this.world.left, 0);//y-axis
+    ctx2.lineTo(this.world.right,0);
+    ctx2.moveTo(0,this.world.top);//x-axis
+    ctx2.lineTo(0,this.world.bottom);
+    ctx2.lineWidth = 3/this.scaleX;
+    ctx2.strokeStyle = "red";
+    ctx2.stroke();
+
     // draw the outline of canvas1 in canvas2=====
-    ctx2.beginPath(ctx1.width, ctx1.height);
-    ctx2.lineTo(ctx1.height/2, ctx1.width/2);
-    ctx2.strokeStyle = "rgba(25, 255, 255)";
+    ctx2.beginPath();
+    ctx2.rect(this.canvas1Loc.x,this.canvas1Loc.y,cnv1.width,cnv1.height);
+    ctx2.strokeStyle = "white";
+    ctx2.stroke();
+
     // run all the actors=====
+    ctx1.restore();
+    ctx2.restore();
 
 
 }
