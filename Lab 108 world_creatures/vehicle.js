@@ -73,15 +73,15 @@ Vehicle.prototype.checkEdges = function(){
 
 
   if(this.location.x < 0){
-    this.location.x = game.canvas1.width;
+    this.location.x = game.world.width;
   }
-  if(this.location.x > game.canvas1.width){
+  if(this.location.x > game.world.width){
     this.location.x = 0;
   }
   if(this.location.y < 0){
-    this.location.y = game.canvas1.height;
+    this.location.y = game.world.height;
   }
-  if(this.location.y > game.canvas1.height){
+  if(this.location.y > game.world.height){
     this.location.y = 0;
   }
 }
