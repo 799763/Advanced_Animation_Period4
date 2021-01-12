@@ -26,32 +26,33 @@ function Game(){
         switch(event.code){
             case "KeyW":
                 if(game.canvas1Loc.y+100 > game.world.top)
-                    game.canvas1Loc.y -= 20;
+                    game.canvas1Loc.y -= 100;
                 break;
             case "KeyS":
                 if(game.canvas1Loc.y + game.canvas1.height -100 < game.world.bottom)
-                    game.canvas1Loc.y += 20;
+                    game.canvas1Loc.y += 100;
                 break;
             case "KeyA":
                 if(game.canvas1Loc.x+100 > game.world.left)
-                    game.canvas1Loc.x -= 20;
+                    game.canvas1Loc.x -= 100;
                 break;
             case "KeyD":
                 if(game.canvas1Loc.x + game.canvas1.width -100 < game.world.right)
-                    game.canvas1Loc.x += 20;
+                    game.canvas1Loc.x += 100;
                 break;
             break;
             }
     }, false);
 
+    this.numVehicles = 20;
+    this.vehicles = [];
+    for(let i = 0; i < this.numVehicles; i++){
+      let loc = new JSVector(Math.random()*this.world.width, Math.random()*this.world.height);
+      this.vehicles.push(new Vehicle(loc));
+    }
+
 }//++++++++++++++++++++++  end game constructor
 
-this.numVehicles = 20;
-this.vehicles = [];
-for(let i = 0; i < this.vehicles; i++){
-  let loc = new JSVector(Math.random()*this.canvas.world.width, Math.random()*this.canvas.world.height);
-  this.vehicles.push(new Vehicle(loc));
-}
 
 // function to run the game each animation cycle
 Game.prototype.run = function(){
@@ -105,8 +106,8 @@ Game.prototype.run = function(){
     ctx2.stroke();
 
     // run all the actors=====
-    for(let i = 0; i < this.vehicles.length; i++){
-        this.vehichles[i].run();
+    for(let i = 0; i < this.numVehicles; i++){
+        this.vehicles[i].run();
       }
 
     ctx1.restore();

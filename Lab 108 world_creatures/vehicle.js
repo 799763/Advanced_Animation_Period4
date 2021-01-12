@@ -17,54 +17,54 @@ Vehicle.prototype.run = function(){
 
 Vehicle.prototype.update = function(){
   this.velocity.add(this.acceleration);
-  this.velocity.limit(game.slider2.value);
+  this.velocity.limit(this.maxSpeed);
   this.location.add(this.velocity);
 }
 
 Vehicle.prototype.render = function(){
-  let ctx = game.ctx;
-  ctx.save();
-  ctx.translate(this.location.x, this.location.y);
-  ctx.rotate(this.velocity.getDirection() + Math.PI/2);
-  ctx.beginPath();
-  ctx.fillStyle = "rgba(255, 75, 25)";
-  ctx.strokeStyle = "rgba(255, 75, 25)";
-  ctx.lineWidth = 1;
-  ctx.moveTo(0, -10);
-  ctx.lineTo(-10, 10);
-  ctx.lineTo(0, 0);
-  ctx.lineTo(10, 10);
-  ctx.closePath();
-  ctx.stroke();
-  ctx.fill();
-  ctx.restore();
+  let ctx1 = game.context1;
+  ctx1.save();
+  ctx1.translate(this.location.x, this.location.y);
+  ctx1.rotate(this.velocity.getDirection() + Math.PI/2);
+  ctx1.beginPath();
+  ctx1.fillStyle = "rgba(255, 75, 25)";
+  ctx1.strokeStyle = "rgba(255, 75, 25)";
+  ctx1.lineWidth = 1;
+  ctx1.moveTo(0, -10);
+  ctx1.lineTo(-10, 10);
+  ctx1.lineTo(0, 0);
+  ctx1.lineTo(10, 10);
+  ctx1.closePath();
+  ctx1.stroke();
+  ctx1.fill();
+  ctx1.restore();
 }
 
 Vehicle.prototype.checkEdges = function(){
   // if(this.location.x < 0){
   //   this.velocity.x = -this.velocity.x;
   // }
-  // if(this.location.x > game.canvas.width){
+  // if(this.location.x > game.world.width){
   //   this.velocity.x = -this.velocity.x;
   // }
   // if(this.location.y < 0){
   //   this.velocity.y = -this.velocity.y;
   // }
-  // if(this.location.y > game.canvas.height){
+  // if(this.location.y > game.world.height){
   //   this.velocity.y = -this.velocity.y;
   // }
 
 
   if(this.location.x < 0){
-    this.location.x = game.canvas.width;
+    this.location.x = game.canvas1.width;
   }
-  if(this.location.x > game.canvas.width){
+  if(this.location.x > game.canvas1.width){
     this.location.x = 0;
   }
   if(this.location.y < 0){
-    this.location.y = game.canvas.height;
+    this.location.y = game.canvas1.height;
   }
-  if(this.location.y > game.canvas.height){
+  if(this.location.y > game.canvas1.height){
     this.location.y = 0;
   }
 }
@@ -74,12 +74,9 @@ Vehicle.prototype.flock = function(vehicles){
   let ali = this.align(vehicles);
   let coh = this.cohesion(vehicles);
 
-  // sep.multiply(1.5);
-  // ali.multiply(1.0);
-  // coh.multiply(1.0);
-  sep.multiply(game.slider3.value);
-  ali.multiply(game.slider4.value);
-  coh.multiply(game.slider5.value);
+  sep.multiply(1.5);
+  ali.multiply(1.0);
+  coh.multiply(1.0);
 
   this.acceleration.add(sep);
   this.acceleration.add(ali);
@@ -116,7 +113,7 @@ Vehicle.prototype.align = function(vehicles){
   if(count > 0){
     sum.divide(count);
     sum.normalize();
-    sum.multiply(game.slider2.value);
+    sum.multiply(this.maxSpeed);
     let steer = sum.sub(this.velocity);
     steer.normalize();
     steer.multiply(1.0);
@@ -149,8 +146,8 @@ Vehicle.prototype.cohesion = function(vehicles){
 Vehicle.prototype.seek = function(target){
   let desired = JSVector(0,0);
   desired.normalize();
-  desired.multiply(game.slider2.value);
+  desired.multiply(this.maxSpeed);
   let steer = desired.sub(this.vel);
-  steer.limit(game.slider1.value);
+  steer.limit(this.maxForce);
   return steer;
 }
