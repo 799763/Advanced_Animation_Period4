@@ -38,6 +38,23 @@ Vehicle.prototype.render = function(){
   ctx1.stroke();
   ctx1.fill();
   ctx1.restore();
+
+  let ctx2 = game.context2;
+  ctx2.save();
+  ctx2.translate(this.location.x, this.location.y);
+  ctx2.rotate(this.velocity.getDirection() + Math.PI/2);
+  ctx2.beginPath();
+  ctx2.fillStyle = "rgba(255, 75, 25)";
+  ctx2.strokeStyle = "rgba(255, 75, 25)";
+  ctx2.lineWidth = 1;
+  ctx2.moveTo(0, -10);
+  ctx2.lineTo(-10, 10);
+  ctx2.lineTo(0, 0);
+  ctx2.lineTo(10, 10);
+  ctx2.closePath();
+  ctx2.stroke();
+  ctx2.fill();
+  ctx2.restore();
 }
 
 Vehicle.prototype.checkEdges = function(){
