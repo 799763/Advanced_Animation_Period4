@@ -46,6 +46,12 @@ function Game(){
 
 }//++++++++++++++++++++++  end game constructor
 
+this.numVehicles = 20;
+this.vehicles = [];
+for(let i = 0; i < this.vehicles; i++){
+  let loc = new JSVector(Math.random()*this.canvas.world.width, Math.random()*this.canvas.world.height);
+  this.vehicles.push(new Vehicle(loc));
+}
 
 // function to run the game each animation cycle
 Game.prototype.run = function(){
@@ -99,6 +105,10 @@ Game.prototype.run = function(){
     ctx2.stroke();
 
     // run all the actors=====
+    for(let i = 0; i < this.vehicles.length; i++){
+        this.vehichles[i].run();
+      }
+
     ctx1.restore();
     ctx2.restore();
 
