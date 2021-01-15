@@ -1,6 +1,6 @@
 function Vehicle(location){
   this.location = location;
-  this.velocity = new JSVector(Math.random()*3, Math.random()*3);
+  this.velocity = new JSVector(Math.random()*3-1.5, Math.random()*3-1.5);
   this.acceleration = new JSVector(0,0);
   // this.maxSpeed = 4;
   // this.maxForce = 0.1;
@@ -72,16 +72,16 @@ Vehicle.prototype.checkEdges = function(){
   // }
 
 
-  if(this.location.x < 0){
-    this.location.x = game.world.width;
-  }
-  if(this.location.x > game.world.width){
+  if(this.location.x < -2000){//===
     this.location.x = 0;
   }
-  if(this.location.y < 0){
-    this.location.y = game.world.height;
+  if(this.location.x > game.world.width){//===
+    this.location.x = 0;
   }
-  if(this.location.y > game.world.height){
+  if(this.location.y < -1500){//===
+    this.location.y = 0;
+  }
+  if(this.location.y > game.world.height){//===
     this.location.y = 0;
   }
 }

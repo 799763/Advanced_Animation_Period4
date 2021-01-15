@@ -47,7 +47,7 @@ function Game(){
     this.numVehicles = 20;
     this.vehicles = [];
     for(let i = 0; i < this.numVehicles; i++){
-      let loc = new JSVector(Math.random()*this.world.width, Math.random()*this.world.height);
+      let loc = new JSVector(Math.random()*this.world.width-this.world.width/2, Math.random()*this.world.height-this.world.height/2);
       this.vehicles.push(new Vehicle(loc));
     }
 
