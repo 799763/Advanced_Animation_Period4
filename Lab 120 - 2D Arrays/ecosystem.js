@@ -15,10 +15,17 @@ class EcoSystem {
             height: 3000
         }
         //  set number of cells in world
+
         //  set number of columns, rows and cell width-height
-
-
+        this.numCols = 40;
+        this.numRows = 30;
+        this.cellWidth = this.world.width / this.numCols;
+        this.cellHeight = this.world.height / this.numCols;
         //  load a 2D array of Cell objects
+        this.cells = new Array(this.numRows);
+        for(let r = 0; r < this.cells.length; r++){
+            this.cells[r] = new Array(this.numCols);
+        }
 
               // canvas2 is scaled according to the ratio of its
         // height and width to the height and width of the world
