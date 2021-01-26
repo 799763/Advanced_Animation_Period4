@@ -9,7 +9,7 @@ class Cell {
     }
 
     render() {
-      let ctx = ecosystem.ctx;
+      let ctx = this.ctx;
       ctx.save();
       ctx.beginPath();
       ctx.fillStyle = "green";
