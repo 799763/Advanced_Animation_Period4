@@ -25,6 +25,9 @@ class EcoSystem {
         this.cells = new Array(this.numRows);
         for(let r = 0; r < this.cells.length; r++){
             this.cells[r] = new Array(this.numCols);
+            for(let c = 0; c < this.numCols; c++){
+                this.cells[r][c] = new Cell(this, r, c, 0);
+            }
         }
 
               // canvas2 is scaled according to the ratio of its
@@ -113,7 +116,11 @@ class EcoSystem {
         ctx2.rect(c1x, c1y, cnv1.width, cnv1.height);
         ctx2.stroke();
         //  Render the cells in the 2D array
-
+        for(let r = 0; r < this.numRows; r++){
+            for(let c = 0; c < this.numCols; c++){
+                this.cells[r][c].run()
+            }
+        }
 
         ctx1.restore();
         ctx2.restore();
