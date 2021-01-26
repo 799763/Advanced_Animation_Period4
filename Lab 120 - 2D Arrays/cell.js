@@ -9,7 +9,13 @@ class Cell {
     }
 
     render() {
-      
+      let ctx = ecosystem.ctx;
+      ctx.save();
+      ctx.beginPath();
+      ctx.fillStyle = "green";
+      ctx.rect(this.loc.x, this.loc.y, this.width, this.height);
+      ctx.stroke();
+      ctx.restore();
     }
 
     update() {
