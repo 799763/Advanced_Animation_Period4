@@ -118,7 +118,7 @@ class EcoSystem {
         //  Render the cells in the 2D array
         for(let r = 0; r < this.numRows; r++){
             for(let c = 0; c < this.numCols; c++){
-                this.cells[r][c].run()
+                this.cells[r][c].run();
             }
         }
 
