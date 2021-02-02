@@ -2,7 +2,7 @@ class Cell{
     constructor(r, c, num) {
       let rows = r;
       let cols = c;
-      let cums = num;
+      let nums = num;
     }//  +++++++++  end constructor
 
     run() {
