@@ -26,8 +26,14 @@ class EcoSystem {
         for(let r = 0; r < this.cells.length; r++){
             this.cells[r] = new Array(this.numCols);
             for(let c = 0; c < this.numCols; c++){
-                this.cells[r][c] = new Cell(this, r, c, 0);
+              let rand = Math.random();
+              let occ = false;
+              if(rand < 0.2){
+                occ = true;
+              }
+              this.cells[r][c] = new Cell(this, r, c, occ);
             }
+            console.log(this.cells);
         }
 
               // canvas2 is scaled according to the ratio of its
@@ -58,6 +64,10 @@ class EcoSystem {
                     break;
             }
         }, false);
+        this.canvas1.addEventListener("click", function(event){
+            let x = event.offSetX;
+            let y = event.ossSetY;
+        });
     }//  +++++++++++++++++++++++++++++++++++++++++++++++++++  end Constructor
 
     // function to run the game each animation cycle
