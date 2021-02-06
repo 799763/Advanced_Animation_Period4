@@ -34,6 +34,14 @@ class Cell{
       ctx.restore();
     }
 
+    loadNeighbors(){
+      this.neighbors = {
+        n:null,
+        e:null,
+        s:null,
+        w:null
+      }
+    }
     update() {
 
     }

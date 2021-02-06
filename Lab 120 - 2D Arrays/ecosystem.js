@@ -66,7 +66,9 @@ class EcoSystem {
         }, false);
         this.canvas1.addEventListener("click", function(event){
             let x = event.offSetX;
-            let y = event.ossSetY;
+            let y = event.offSetY;
+            let x2 = event.offSetX + ecoSystem.canvas1Loc.x;
+            ecoSystem.cells[x][y].occupied = true;
         });
     }//  +++++++++++++++++++++++++++++++++++++++++++++++++++  end Constructor
 
