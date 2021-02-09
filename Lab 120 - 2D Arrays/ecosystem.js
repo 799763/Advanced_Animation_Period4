@@ -47,19 +47,19 @@ class EcoSystem {
             switch (event.code) {
                 case "KeyW":
                     if (ecoSystem.canvas1Loc.y + 100 > ecoSystem.world.top)
-                        ecoSystem.canvas1Loc.y -= 20;
+                        ecoSystem.canvas1Loc.y -= 100;
                     break;
                 case "KeyS":
                     if (ecoSystem.canvas1Loc.y + ecoSystem.canvas1.height - 100 < ecoSystem.world.bottom)
-                        ecoSystem.canvas1Loc.y += 20;
+                        ecoSystem.canvas1Loc.y += 100;
                     break;
                 case "KeyA":
                     if (ecoSystem.canvas1Loc.x + 100 > ecoSystem.world.left)
-                        ecoSystem.canvas1Loc.x -= 20;
+                        ecoSystem.canvas1Loc.x -= 100;
                     break;
                 case "KeyD":
                     if (ecoSystem.canvas1Loc.x + ecoSystem.canvas1.width - 100 < ecoSystem.world.right)
-                        ecoSystem.canvas1Loc.x += 20;
+                        ecoSystem.canvas1Loc.x += 100;
                     break;
                     break;
             }
@@ -67,7 +67,6 @@ class EcoSystem {
         this.canvas1.addEventListener("click", function(event){
             let x = event.offSetX;
             let y = event.offSetY;
-            let x2 = event.offSetX + ecoSystem.canvas1Loc.x;
             ecoSystem.cells[x][y].occupied = true;
         });
     }//  +++++++++++++++++++++++++++++++++++++++++++++++++++  end Constructor
@@ -133,6 +132,7 @@ class EcoSystem {
                 this.cells[r][c].run();
             }
         }
+        actor.run();/////
 
         ctx1.restore();
         ctx2.restore();
