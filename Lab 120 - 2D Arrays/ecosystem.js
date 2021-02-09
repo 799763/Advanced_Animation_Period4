@@ -14,6 +14,8 @@ class EcoSystem {
             width: 4000,
             height: 3000
         }
+        // create an Actor
+        this.actor = new Actor(this);
         //  set number of cells in world
 
         //  set number of columns, rows and cell width-height
@@ -132,7 +134,7 @@ class EcoSystem {
                 this.cells[r][c].run();
             }
         }
-        actor.run();/////
+        this.actor.run();/////
 
         ctx1.restore();
         ctx2.restore();
