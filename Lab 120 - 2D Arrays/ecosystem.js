@@ -45,23 +45,48 @@ class EcoSystem {
         this.scaleY = this.canvas2.height / this.world.height;
         // add an event handler such that the a, s, w, d keys
         // will reposition the canvas within the world.
+        // window.addEventListener("keypress", function (event) {
+        //     switch (event.code) {
+        //         case "KeyW":
+        //             if (ecoSystem.canvas1Loc.y + 100 > ecoSystem.world.top)
+        //                 ecoSystem.canvas1Loc.y -= 100;
+        //             break;
+        //         case "KeyS":
+        //             if (ecoSystem.canvas1Loc.y + ecoSystem.canvas1.height - 100 < ecoSystem.world.bottom)
+        //                 ecoSystem.canvas1Loc.y += 100;
+        //             break;
+        //         case "KeyA":
+        //             if (ecoSystem.canvas1Loc.x + 100 > ecoSystem.world.left)
+        //                 ecoSystem.canvas1Loc.x -= 100;
+        //             break;
+        //         case "KeyD":
+        //             if (ecoSystem.canvas1Loc.x + ecoSystem.canvas1.width - 100 < ecoSystem.world.right)
+        //                 ecoSystem.canvas1Loc.x += 100;
+        //             break;
+        //             break;
+        //     }
+        // }, false);
         window.addEventListener("keypress", function (event) {
             switch (event.code) {
                 case "KeyW":
-                    if (ecoSystem.canvas1Loc.y + 100 > ecoSystem.world.top)
-                        ecoSystem.canvas1Loc.y -= 100;
+                    if (ecoSystem.canvas1Loc.y + 20 > ecoSystem.world.top)
+                        ecoSystem.canvas1Loc.y -= 20;
+                        this.actor.loc.y -=20;
                     break;
                 case "KeyS":
                     if (ecoSystem.canvas1Loc.y + ecoSystem.canvas1.height - 100 < ecoSystem.world.bottom)
-                        ecoSystem.canvas1Loc.y += 100;
+                        ecoSystem.canvas1Loc.y += 20;
+                        this.actor.loc.y += 20;
                     break;
                 case "KeyA":
-                    if (ecoSystem.canvas1Loc.x + 100 > ecoSystem.world.left)
-                        ecoSystem.canvas1Loc.x -= 100;
+                    if (ecoSystem.canvas1Loc.x + 20 > ecoSystem.world.left)
+                        ecoSystem.canvas1Loc.x -= 20;
+                        this.actor.loc.x -= 20;
                     break;
                 case "KeyD":
                     if (ecoSystem.canvas1Loc.x + ecoSystem.canvas1.width - 100 < ecoSystem.world.right)
-                        ecoSystem.canvas1Loc.x += 100;
+                        ecoSystem.canvas1Loc.x += 20;
+                        this.actor.loc.x += 20;
                     break;
                     break;
             }

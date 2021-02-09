@@ -17,10 +17,10 @@ class Actor{
       ctx.strokeStyle = "red";
       ctx.fillStyle = "red";
       ctx.beginPath();
-      ctx.moveTo(0,-20);
-      ctx.lineTo(-20,0);
-      ctx.lineTo(0,0);
-      ctx.lineTo(20,20);
+      ctx.moveTo(0,-40);//front
+      ctx.lineTo(-20,0);//right
+      ctx.lineTo(0,-15);//middle
+      ctx.lineTo(20,0);//left
       ctx.closePath();
       ctx.fill();
       ctx.stroke();
