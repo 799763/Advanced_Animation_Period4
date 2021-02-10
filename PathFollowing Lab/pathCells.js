@@ -5,7 +5,7 @@ var pathCells = [
     [0,3],  // row 0 column 3
     [1,3],  // row 1 column 3
     [2,3],
-    [3,3],
+    [3,3],  // first turn
     [3,4],
     [3,5],
     [3,6],

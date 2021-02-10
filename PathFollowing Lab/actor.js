@@ -6,15 +6,18 @@ class Actor {
         // start off the actor in the first cell of the path
         this.pathIndex = 0;
         this.currentCell = game.path[this.pathIndex];
-        this.nextCell = game.path[this.pathIndex+1];   // next in the path of cells
+        // next in the path of cells
+        this.nextCell = game.path[this.pathIndex+1];
         // where this actor should aim -- the center of the next cell in the path
         this.target = new JSVector(this.nextCell.loc.x + this.nextCell.width/2,
                             this.nextCell.loc.y + this.nextCell.height/2);
-        this.lastCell = game.path[game.path.length-1];  // end of the path
+        // end of the path
+        this.lastCell = game.path[game.path.length-1];
         // position the actor initially in the center of the first cell
         this.loc = new JSVector(this.currentCell.loc.x + this.currentCell.width/2,
                                 this.currentCell.loc.y + this.currentCell.height/2);
-        this.vel = new JSVector(0,0);   // velocity
+        // velocity
+        this.vel = new JSVector(0,0);
     }
 
     run() {
@@ -25,6 +28,9 @@ class Actor {
     update(){
         // move this actor along the path until it reaches the end of
         // the path and dies
+        while(this.currentCell !== this.lastCell){
+          this.vel.add(this.nextCell + this.target);
+        }
     }
 
     render(){
