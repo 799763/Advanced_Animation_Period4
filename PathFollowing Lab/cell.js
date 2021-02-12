@@ -13,6 +13,7 @@ class Cell {
         // let grn = Math.random() * 200 + 55;
         // let blu = Math.random() * 100 + 55;
         // this.clr = "rgba(" + red + ", " + grn + "," + blu + ", " + .65 + ")"
+        this.center = new JSVector(this.loc.x + this.width/2, this.loc.y + this.height/2);
     }//  +++++++++  end constructor
 
     run() {
