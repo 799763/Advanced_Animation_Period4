@@ -28,9 +28,13 @@ class Actor {
     update(){
         // move this actor along the path until it reaches the end of
         // the path and dies
-        while(this.currentCell !== this.lastCell){
-          this.vel.add(this.nextCell + this.target);
+        for(let i = 0; i < 5; i++){
+          this.loc.add(this.nextCell + this.currentCell.with/2);
+          if(this.currentCell = this.lastCell){
+            break;
+          }
         }
+        // Max steps are 55-56
     }
 
     render(){
