@@ -23,22 +23,22 @@ function Game(){
             this.grid[r][c] = new Cell(this, r, c);
         }
     }
+    //Create the goal and set it to bottom right
+    let endCell = grid[grid.length-1];
 
-    // Create a path for the actors to follow.
-    // The path is an array of cells as specified in a separate file.
-    this.path = [];
-    for(let c = 0; c < pathCells.length; c++){
-        let cell = this.grid[pathCells[c][0]][pathCells[c][1]];
-        cell.isPath = true;
-        this.path.push(cell);
-    }
+    //Create an array of neighbors
+    this.neighbors = [];
 
-    // Create an actor to follow the path.
+    // Create an actor.
     // Additional actors may be created periodically.
     this.actors = [];
     this.actors.push(new Actor(this));  // one actor initially
 
 }//++++++++++++++++++++++  end Game constructor
+
+Game.prototype.brushFire = function(){
+
+}
 
 // function to run the game each animation cycle
 Game.prototype.run = function(){
@@ -52,9 +52,8 @@ Game.prototype.run = function(){
     // Show the end cell
     this.ctx.fillStyle = "brown";
     this.ctx.font = '18px sans-serif';
-    let endCell = this.path[this.path.length-1];
-    this.ctx.fillText("End", endCell.loc.x + endCell.width/2 - 16,
-                    endCell.loc.y + endCell.height/2 + 8);
+    this.ctx.fillText("End", this.endCell.loc.x + this.endCell.width/2 - 16,
+                    this.endCell.loc.y + endCell.height/2 + 8);
 
     // run all the actors
     for(let i = 0; i < this.actors.length; i++){
