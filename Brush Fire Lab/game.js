@@ -24,7 +24,7 @@ function Game(){
         }
     }
     //Create the goal and set it to bottom right
-    let endCell = grid[grid.length-1];
+    let endCell = this.grid[this.grid.length-1];
 
     //Create an array of neighbors
     this.neighbors = [];
