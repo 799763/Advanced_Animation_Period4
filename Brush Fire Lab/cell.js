@@ -14,6 +14,8 @@ class Cell {
         // let blu = Math.random() * 100 + 55;
         // this.clr = "rgba(" + red + ", " + grn + "," + blu + ", " + .65 + ")"
         this.center = new JSVector(this.loc.x + this.width/2, this.loc.y + this.height/2);
+        this.distance = 1000;
+        this.neighbors = [];
     }//  +++++++++  end constructor
 
     run() {
@@ -36,13 +38,33 @@ class Cell {
         ctx.rect(this.loc.x, this.loc.y, this.width, this.height);
         // ctx.fill();
         ctx.stroke();
+        
         // ctx.font = '10px serif';
         // ctx.strokeText("r = " + this.r, this.loc.x + 5, this.loc.y + 11);
         // ctx.strokeText("c = " + this.c, this.loc.x + 5, this.loc.y + 31);
 
     }
 
-    update() {
-
+    loadNeighbors() {
+        if(this.neighbors.length == 0){
+          //Load north neighbor
+          if(this.r > 0){
+            this.neighbors.push(this.game.grid[this.r-1][this.c]);
+          }
+          //Load south neighbor
+          if(this.c > 0){
+            this.neighbors.push(this.game.grid[this.r][this.c-1]);
+          }
+          //Load east neighbor
+          if(this.r < this.game.numRows-1){
+            this.neighbors.push(this.game.grid[this.r+1][this.c]);
+          }
+          //Load west neighbor
+          if(this.c < this.game.numCols-1){
+            this.neighbors.push(this.game.grid[this.r][this.c+1]);
+          }
+        }
     }
+
+
 }//+++++++++++++++++++++  end of Cell class
