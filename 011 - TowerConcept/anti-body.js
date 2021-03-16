@@ -1,8 +1,9 @@
 class Antibody(){
-  constructor(target){
+  constructor(x, y, target){
     this.target = target;
-    this.velocity = new JSVecctor(Math.random()*3, Math.random()*3);
+    this.velocity = new JSVecctor(5, 5);
     this.acceleration = new JSVector(0,0);
+    this.loc = new JSVector(x,y);
   }
   run(){
     this.render();
@@ -30,7 +31,7 @@ class Antibody(){
     let dist = this.loc.distance(game.actor.location);
     if(dist != game.actor.location){
       this.velocity.add(this.acceleration);
-      this.velocity.limit();
+      this.velocity.limit(15);
       this.location.add(this.velocity);
     }else{
       return;

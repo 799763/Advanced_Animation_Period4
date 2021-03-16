@@ -1,6 +1,6 @@
 class Tower{
   constructor(game){
-      this.location = new JSVector(game.grid[5][0], game.grid[0][6]);
+      this.location = new JSVector(100, 100);
       this.radius = 15;
       this.vel = new JSVector(0,0);
   }
@@ -29,8 +29,8 @@ class Tower{
   }
 
   update(){
-    this.distance = this.location.distance(game.actor.location);
-    while(game.actor.location != actor.lastCell.center){
+    this.distance = this.location.distance(game.actor.loc);
+    while(game.actor.loc != actor.lastCell.center){
       if(this.distance < 50){
         this.attack();
       }
@@ -38,7 +38,7 @@ class Tower{
   }
 
   attack(){
-    this.antiBody = new AntiBody(game.actor.location);
+    this.antiBody = new AntiBody(this.location.x, this.location.y, game.actor.loc);
     this.antiBody.run();
   }
 }
