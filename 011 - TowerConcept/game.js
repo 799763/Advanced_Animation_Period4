@@ -38,11 +38,15 @@ function Game(){
     this.actors = [];
     this.actors.push(new Actor(this));  // one actor initially
 
+    //Create a Tower
+    this.towers = [];
+    this.towers.push(new Tower(this));
+
 }//++++++++++++++++++++++  end Game constructor
 
 // function to run the game each animation cycle
 Game.prototype.run = function(){
-    this.ctx.fillStyle = "saddlebrown";
+    this.ctx.fillStyle = "pink";
     this.ctx.fillRect(0,0,this.canvas.width, this.canvas.height);
     for (let r = 0; r < this.grid.length; r++) {
         for (let c = 0; c < this.numCols; c++) {
@@ -61,4 +65,7 @@ Game.prototype.run = function(){
         this.actors[i].run();
     }
 
+    for(let i = 0; i < this.towers.length; i++){
+        this.towers[i].run();
+    }
 }
