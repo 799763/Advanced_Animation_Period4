@@ -39,6 +39,5 @@ class Tower{
 
   attack(){
     this.antiBody = new AntiBody(this.location.x, this.location.y, game.actor.loc);
-    this.antiBody.run();
   }
 }
