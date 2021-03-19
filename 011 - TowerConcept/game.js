@@ -35,12 +35,16 @@ function Game(){
 
     // Create an actor to follow the path.
     // Additional actors may be created periodically.
-    this.actors = [];
-    this.actors.push(new Actor(this));  // one actor initially
+    this.actor = new Actor(this);  // one actor initially
 
     //Create a Tower
     this.towers = [];
-    this.towers.push(new Tower(this));
+
+    this.canvas.addEventListener("click", function(event){
+      let x = event.offsetX;
+      let y = event.offsetY;
+      game.towers.push(new Tower(game, new JSVector(x,y)));
+    });
 
 }//++++++++++++++++++++++  end Game constructor
 
@@ -61,9 +65,7 @@ Game.prototype.run = function(){
                     endCell.loc.y + endCell.height/2 + 8);
 
     // run all the actors
-    for(let i = 0; i < this.actors.length; i++){
-        this.actors[i].run();
-    }
+    this.actor.run();
 
     for(let i = 0; i < this.towers.length; i++){
         this.towers[i].run();

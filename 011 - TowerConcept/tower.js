@@ -1,6 +1,6 @@
 class Tower{
-  constructor(game){
-      this.location = new JSVector(100, 100);
+  constructor(game, loc){
+      this.location = loc;
       this.radius = 15;
       this.vel = new JSVector(0,0);
   }
@@ -30,14 +30,13 @@ class Tower{
 
   update(){
     this.distance = this.location.distance(game.actor.loc);
-    while(game.actor.loc != actor.lastCell.center){
-      if(this.distance < 50){
+      if(this.distance < 100){
         this.attack();
-      }
     }
   }
 
   attack(){
     this.antiBody = new AntiBody(this.location.x, this.location.y, game.actor.loc);
+    this.antiBody.run();
   }
 }
