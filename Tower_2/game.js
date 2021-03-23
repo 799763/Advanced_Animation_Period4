@@ -9,13 +9,13 @@ function Game(){
     // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D
     this.ctx = this.canvas.getContext('2d'); // This is the context
 
-    //   create the array of boid objects
-    this.boids = [];
-    let numBoids = 15;
-    for(var i = 0; i < numBoids; i++){
+    //   create the array of enemy objects
+    this.enemies = [];
+    let numEnemies = 15;
+    for(var i = 0; i < numEnemies; i++){
         let rad = 10;
-        let clr = "red";
-        this.boids.push(new Boid(this.canvas,rad, clr)); // add new boid to array
+        let clr = "black";
+        this.enemies.push(new Enemy(this.canvas,rad, clr)); // add new enemy to array
     }
 
     //Create an array of towers
@@ -55,7 +55,7 @@ Game.prototype.run = function(){
       this.towers[i].run();    // run each tower
    }
 
-   for(let i = 0; i < this.boids.length; i++){
-     this.boids[i].run();    // run each boid
+   for(let i = 0; i < this.enemies.length; i++){
+     this.enemies[i].run();    // run each enemy
   }
 }
