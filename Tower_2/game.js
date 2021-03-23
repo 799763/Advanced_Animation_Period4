@@ -9,15 +9,6 @@ function Game(){
     // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D
     this.ctx = this.canvas.getContext('2d'); // This is the context
 
-    //   create the array of boid objects
-    this.boids = [];
-    let numBoids = 15;
-    for(var i = 0; i < numBoids; i++){
-        let rad = 20;
-        let clr = "red";
-        this.boids.push(new Boid(this.canvas,rad, clr)); // add new boid to array
-    }
-
     //  Add event handlers to all tile objects
     for(let i = 0; i < this.ga.tiles.length; i++){
         this.ga.tiles[i].addEventListener('mouseover', // mouseover is the name of an event
@@ -36,12 +27,22 @@ function Game(){
           },false);
     }
 
+    //Create an array of towers
+    this.towers = [];
+
+    //load array with tower at mouse location
+    this.canvas.addEventListener("click", function(event){
+      let x = event.offsetX;
+      let y = event.offsetY;
+      game.towers.push(new Tower(game, new JSVector(x,y)));
+    });
+
 }//++++++++++++++++++++++  end game constructor
 
 
 // function to run the game each animation cycle
 Game.prototype.run = function(){
-    for(let i = 0; i < this.boids.length; i++){
-      this.boids[i].run();    // run each boid
+    for(let i = 0; i < this.towers.length; i++){
+      this.towers[i].run();    // run each tower
    }
 }
