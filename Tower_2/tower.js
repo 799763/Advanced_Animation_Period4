@@ -1,44 +1,38 @@
-function Tower(game, loc){
-  let radius = 15;
-  this.loc = loc;
-}
-
-Tower.prototype.run(){
-  this.update();
-  this.render();
-  this.checkEdges();
-}
-
-Tower.prototype.render(){
-  let ctx = game.ctx;
-
-  ctx.strokeStyle = "blue";
-  ctx.beginPath();
-  ctx.arc(this.loc.x,this.loc.y, this.radius, Math.PI*2, 0, false);
-  ctx.stroke();
-  ctx.closePath();
-}
-
-Tower.prototype.update(){
-  this.distance = this.loc.distance(game.actor.loc);
-  if(this.distance < 150){
-    this.attack();
+class Tower{
+  constructor(game, loc){
+    let radius = 15;
+    this.loc = loc;
   }
-}
 
-Tower.prototype.checkEdges(){
-  let canvas = game.canvas;
+  run(){
+    this.update();
+    this.render();
+  }
 
-  if(this.loc.x - this.radius < 0){
-      this.vel.x = -this.vel.x;
+  render(){
+    let ctx = game.ctx;
+    ctx.strokeStyle = "black";
+    ctx.fillStyle = "red";
+    ctx.beginPath();
+    ctx.save();
+    ctx.translate(this.loc.x, this.loc.y);
+    ctx.moveTo(0,-this.radius);
+    ctx.lineTo(-this.radius/2 , this.radius/3);
+    ctx.lineTo(0,4);
+    ctx.lineTo(this.radius/2, this.radius/3);
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+    ctx.restore();
   }
-  if(this.loc.x + this.radius > canvas.width){
-      this.vel.x = -this.vel.x;
-  }
-  if(this.loc.y - this.radius < 0){
-      this.vel.y = -this.vel.y;
-  }
-  if(this.loc.y + this.radius > canvas.height){
-      this.vel.y = -this.vel.y;
+
+  update(){
+    for(let i = 0; i > game.boids.length; i++){
+      this.distance = this.loc.distance(game.boids[i].loc);
+      if(this.distance < 150){
+        this.antiBody() = new AntiBody(this.loc.x, this.loc.y, game.boids[i].loc);
+        this.antiBody.run();
+      }
+    }
   }
 }
