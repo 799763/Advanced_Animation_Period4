@@ -1,7 +1,8 @@
 //  Enemy constructor function +++++++++++++++++++++++++++++
 function Enemy(canvas,rad, clr){
     this.radius = rad;
-    this.color = clr;
+    this.precolor = clr;
+    this.type = Math.floor(Math.random(1)*2);
     // random location
     let x = (Math.random() * (canvas.width - 2*this.radius)) + this.radius;
     let y = (Math.random() * (canvas.height - 2*this.radius)) + this.radius;
@@ -16,7 +17,7 @@ function Enemy(canvas,rad, clr){
 
 Enemy.prototype.run = function(){
     this.update();
-    this.checkEdges();
+    //this.checkEdges();
     this.render();
   }
 
@@ -25,8 +26,11 @@ Enemy.prototype.run = function(){
 // draw the Enemy on the canvas
 Enemy.prototype.render = function(){
     let ctx = game.ctx;
-
-    ctx.strokeStyle = this.color;
+    if(this.type = 1){
+      ctx.strokeStyle = "blue";
+    }else if(this.type = 0){
+      ctx.strokeStyle = "green";
+    }
     ctx.beginPath();
     // +++++++++++++++++++++++
     // draw as circles
