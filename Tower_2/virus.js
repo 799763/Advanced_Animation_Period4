@@ -2,7 +2,7 @@
 function Virus(canvas,rad, clr){
     this.radius = rad;
     this.precolor = clr;
-    this.type = Math.floor(Math.random(1)*2);
+    this.type = "Virus";
     // random location
     let x = (Math.random() * (canvas.width - 2*this.radius)) + this.radius;
     let y = (Math.random() * (canvas.height - 2*this.radius)) + this.radius;

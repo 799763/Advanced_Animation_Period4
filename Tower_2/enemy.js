@@ -2,7 +2,7 @@
 function Enemy(canvas,rad, clr){
     this.radius = rad;
     this.precolor = clr;
-    this.type = "Virus";
+    this.type = "Enemy";
     // random location
     let x = (Math.random() * (canvas.width - 2*this.radius)) + this.radius;
     let y = (Math.random() * (canvas.height - 2*this.radius)) + this.radius;
