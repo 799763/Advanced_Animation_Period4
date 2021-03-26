@@ -22,8 +22,7 @@ class AntiBody{
     ctx.restore();
   }
   update(){
-    let dist = this.loc.distance(game.actor.location);
-    if(dist != game.actor.location){
+    if(this.loc != game.actor.location){
       this.velocity.add(this.acceleration);
       this.velocity.limit(15);
       this.location.add(this.velocity);

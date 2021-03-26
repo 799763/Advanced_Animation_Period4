@@ -11,19 +11,11 @@ class Tower{
 
   render(){
     let ctx = game.ctx;
-    ctx.strokeStyle = "black";
+    ctx.strokeStyle = "red";
     ctx.fillStyle = "red";
     ctx.beginPath();
-    ctx.save();
-    ctx.translate(this.loc.x, this.loc.y);
-    ctx.moveTo(0,-this.radius);
-    ctx.lineTo(-this.radius/2 , this.radius/3);
-    ctx.lineTo(0,4);
-    ctx.lineTo(this.radius/2, this.radius/3);
-    ctx.closePath();
-    ctx.fill();
+    ctx.arc(this.loc.x,this.loc.y, this.radius, Math.PI*2, 0, false);
     ctx.stroke();
-    ctx.restore();
   }
 
   update(){

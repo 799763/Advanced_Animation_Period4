@@ -1,8 +1,8 @@
-//  Enemy constructor function +++++++++++++++++++++++++++++
-function Enemy(canvas,rad, clr){
+//  Virus constructor function +++++++++++++++++++++++++++++
+function Virus(canvas,rad, clr){
     this.radius = rad;
     this.precolor = clr;
-    this.type = "Virus";
+    this.type = Math.floor(Math.random(1)*2);
     // random location
     let x = (Math.random() * (canvas.width - 2*this.radius)) + this.radius;
     let y = (Math.random() * (canvas.height - 2*this.radius)) + this.radius;
@@ -13,9 +13,9 @@ function Enemy(canvas,rad, clr){
     this.vel = new JSVector(dx,dy);
 }
 
-  //  placing methods in the prototype (every Enemy shares functions)
+  //  placing methods in the prototype (every Virus shares functions)
 
-Enemy.prototype.run = function(){
+Virus.prototype.run = function(){
     this.update();
     this.checkEdges();
     this.render();
@@ -23,11 +23,11 @@ Enemy.prototype.run = function(){
 
 
 
-// draw the Enemy on the canvas
-Enemy.prototype.render = function(){
+// draw the Virus on the canvas
+Virus.prototype.render = function(){
     let ctx = game.ctx;
     if(this.type = 1){
-      ctx.strokeStyle = "blue";
+      ctx.strokeStyle = "green";
     }else if(this.type = 0){
       ctx.strokeStyle = "green";
     }
@@ -39,14 +39,14 @@ Enemy.prototype.render = function(){
   }
 
 // Add velocity to location
-Enemy.prototype.update = function(){
+Virus.prototype.update = function(){
   if(!game.gamePaused) {
       this.loc.add(this.vel);
     }
 }
 
-// When a Enemy hits an edge of the canvas, it changes direction.
-Enemy.prototype.checkEdges = function(){
+// When a Virus hits an edge of the canvas, it changes direction.
+Virus.prototype.checkEdges = function(){
     let canvas = game.canvas;
 
     if(this.loc.x - this.radius < 0){

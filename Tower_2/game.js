@@ -30,10 +30,8 @@ function Game(){
     this.towers = [];
     //load array with tower at mouse location
     this.canvas.addEventListener("click", function(event){
-      // let x = event.offsetX;
-      // let y = event.offsetY;
-      let x = 800;
-      let y = 200;
+      let x = event.offsetX;
+      let y = event.offsetY;
       game.towers.push(new Tower(game, new JSVector(x,y)));
     });
 
