@@ -18,6 +18,14 @@ function Game(){
         this.enemies.push(new Enemy(this.canvas,rad, clr)); // add new enemy to array
     }
 
+    this.viruses = [];
+    let numViruses = 15;
+    for(var i = 0; i < numViruses; i++){
+        let rad = 10;
+        let clr = "black";
+        this.viruses.push(new Virus(this.canvas,rad, clr)); // add new enemy to array
+    }
+
     //Create an array of towers
     this.towers = [];
     //load array with tower at mouse location
@@ -57,5 +65,9 @@ Game.prototype.run = function(){
 
    for(let i = 0; i < this.enemies.length; i++){
      this.enemies[i].run();    // run each enemy
+  }
+
+  for(let i = 0; i < this.viruses.length; i++){
+    this.viruses[i].run();
   }
 }
