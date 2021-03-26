@@ -22,7 +22,7 @@ class Tower{
     for(let i = 0; i > game.enemies.length; i++){
       this.distance = this.loc.distance(game.enemies[i].loc);
       if(this.distance < 150){
-        this.antiBody() = new AntiBody(this.loc.x, this.loc.y, game.boids[i].loc);
+        this.antiBody = new AntiBody(this.loc.x, this.loc.y, game.enemies[i].loc);
         this.antiBody.run();
       }
     }
