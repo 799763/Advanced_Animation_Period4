@@ -8,8 +8,8 @@ function Enemy(canvas,rad, clr){
     let y = (Math.random() * (canvas.height - 2*this.radius)) + this.radius;
     this.loc = new JSVector(x,y);
     // random velocity
-    let dx = (Math.random() * 6) -2;
-    let dy = (Math.random() * 6) -2;
+    let dx = (Math.random() * 3) -2;
+    let dy = (Math.random() * 3) -2;
     this.vel = new JSVector(dx,dy);
 }
 
