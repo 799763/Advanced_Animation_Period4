@@ -1,7 +1,7 @@
 class AntiBody{
   constructor(x, y, target){
     this.target = target;
-    this.velocity = new JSVector(5, 5);
+    this.velocity = new JSVector(3, 3);
     this.acceleration = new JSVector(0,0);
     this.loc = new JSVector(x,y);
   }
@@ -22,11 +22,11 @@ class AntiBody{
     ctx.restore();
   }
   update(){
-    let dist = this.loc.distance(game.actor.location);
-    if(dist != game.actor.location){
+    let dist = this.loc.distance(game.actor.loc);
+    if(dist < 100){
       this.velocity.add(this.acceleration);
       this.velocity.limit(15);
-      this.location.add(this.velocity);
+      this.loc.add(this.velocity);
     }else{
       return;
     }
