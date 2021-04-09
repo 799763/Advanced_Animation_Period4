@@ -15,7 +15,7 @@ class AntiBody{
     ctx.fillStyle = "white";
     ctx.beginPath();
     ctx.save();
-    ctx.arc(this.loc.x, this.loc.y, 6, 0, Math.PI*2);
+    ctx.arc(this.loc.x, this.loc.y, 5, 0, Math.PI*2);
     ctx.closePath();
     ctx.fill();
     ctx.stroke();

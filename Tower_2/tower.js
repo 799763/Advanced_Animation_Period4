@@ -5,17 +5,19 @@ class Tower{
   }
 
   run(){
-    this.update();
+    //this.update();
     this.render();
   }
 
   render(){
     let ctx = game.ctx;
+    ctx.save();
     ctx.strokeStyle = "red";
     ctx.fillStyle = "red";
     ctx.beginPath();
     ctx.arc(this.loc.x,this.loc.y, this.radius, Math.PI*2, 0, false);
     ctx.stroke();
+    ctx.restore();
   }
 
   update(){
