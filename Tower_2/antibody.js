@@ -22,12 +22,12 @@ class AntiBody{
     ctx.restore();
   }
   update(){
-    if(this.loc != game.actor.location){
+    //if(this.loc != game.actor.location){
       this.velocity.add(this.acceleration);
       this.velocity.limit(15);
       this.location.add(this.velocity);
-    }else{
-      return;
-    }
+    //}else{
+      //return;
+    //}
   }
 }
