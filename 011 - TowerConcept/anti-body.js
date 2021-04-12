@@ -23,12 +23,10 @@ class AntiBody{
   }
   update(){
     let dist = this.loc.distance(game.actor.loc);
-    if(dist < 100){
+    if(dist < 10000){
       this.velocity.add(this.acceleration);
       this.velocity.limit(15);
       this.loc.add(this.velocity);
-    }else{
-      return;
     }
   }
 }
