@@ -1,6 +1,6 @@
 class Tower{
   constructor(game, loc){
-    let radius = 15;
+    this.radius = 15;
     this.loc = loc;
   }
 
@@ -11,13 +11,28 @@ class Tower{
 
   render(){
     let ctx = game.ctx;
-    ctx.save();
     ctx.strokeStyle = "red";
-    ctx.fillStyle = "red";
     ctx.beginPath();
     ctx.arc(this.loc.x,this.loc.y, this.radius, Math.PI*2, 0, false);
     ctx.stroke();
-    ctx.restore();
+
+
+    // let ctx = game.ctx;
+    // ctx.save();
+    // ctx.translate(this.loc.x, this.loc.y);
+    // //ctx.rotate(this.velocity.getDirection() + Math.PI/2);
+    // ctx.beginPath();
+    // ctx.fillStyle = "rgba(255, 75, 25)";
+    // ctx.strokeStyle = "rgba(255, 75, 25)";
+    // ctx.lineWidth = 1;
+    // ctx.moveTo(0, -10);
+    // ctx.lineTo(-10, 10);
+    // ctx.lineTo(0, 0);
+    // ctx.lineTo(10, 10);
+    // ctx.closePath();
+    // ctx.stroke();
+    // ctx.fill();
+    // ctx.restore();
   }
 
   update(){
