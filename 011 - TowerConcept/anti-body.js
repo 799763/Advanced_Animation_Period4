@@ -31,6 +31,7 @@ class Antibody{
       this.velocity.limit(2);
       this.loc.add(this.velocity);
     }else if(dist > 5){
+      this.acceleration.multiply(0);
       this.acceleration = JSVector.subGetNew(game.actor.loc, this.loc);
       this.acceleration.normalize();
       this.acceleration.multiply(0.1);
