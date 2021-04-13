@@ -3,11 +3,15 @@ class Tower{
       this.location = loc;
       this.radius = 15;
       this.vel = new JSVector(0,0);
+      this.antibodies = [];
   }
 
   run(){
     this.render();
     this.update();
+    for(let i = 0; i < this.antibodies.length; i++){
+      this.antibodies[i].run();
+    }
   }
 
   render(){
@@ -31,12 +35,12 @@ class Tower{
   update(){
     this.distance = this.location.distance(game.actor.loc);
       if(this.distance < 100){
-        this.attack();
+        this.createAntibody();
     }
   }
 
-  attack(){
-    this.antiBody = new AntiBody(this.location.x, this.location.y, game.actor.loc);
-    this.antiBody.run();
+  createAntibody(){
+    let antibody = new Antibody(this.location.x, this.location.y, game.actor.loc);
+    this.antibodies.push(antibody);
   }
 }
