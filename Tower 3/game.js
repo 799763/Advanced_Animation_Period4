@@ -29,10 +29,22 @@ function Game(){
     //Create an array of towers
     this.towers = [];
     //load array with tower at mouse location
+    this.towers.push(new Tower(this.canvas, 200, 200));
+    this.towers.push(new Tower(this.canvas, 700, 200));
+    this.towers.push(new Tower(this.canvas, 200, 500));
+    this.towers.push(new Tower(this.canvas, 700, 500));
+
+    this.tCells = [];
+    // let numCells = 15;
+    // for(var i = 0; i < numViruses; i++){
+    //     let rad = 10;
+    //     let clr = "black";
+    //     this.tCells.push(new TCell(this.canvas,rad, clr)); // add new enemy to array
+    // }
     this.canvas.addEventListener("click", function(event){
       let x = event.offsetX;
       let y = event.offsetY;
-      game.towers.push(new Tower(game, new JSVector(x,y)));
+      game.towers.push(new TCell(game, new JSVector(x,y)));
     });
 
     //  Add event handlers to all tile objects
@@ -67,5 +79,9 @@ Game.prototype.run = function(){
 
   for(let i = 0; i < this.viruses.length; i++){
     this.viruses[i].run();
+  }
+
+  for(let i = 0; i < this.tCells.length; i++){
+    this.tCells[i].run();
   }
 }

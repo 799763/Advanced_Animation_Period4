@@ -1,7 +1,7 @@
 class Tower{
-  constructor(game, loc){
+  constructor(game,x, y,){
     this.radius = 15;
-    this.loc = loc;
+    this.loc = new JSVector(x,y);
   }
 
   run(){
