@@ -7,8 +7,14 @@ class Antibody{
   }
   run(){
     this.render();
-    this.update();
+    //this.update();
+    this.delay();
   }
+
+  delay(){
+    let interv = setInterval(this.update,1000);
+  }
+
   render(){
     let ctx = game.ctx;
     ctx.strokeStyle = "black";
@@ -21,6 +27,7 @@ class Antibody{
     ctx.stroke();
     ctx.restore();
   }
+  
   update(){
     let dist = this.loc.distance(game.actor.loc);
     if(dist < 100){
