@@ -27,10 +27,10 @@ class Antibody{
     ctx.stroke();
     ctx.restore();
   }
-  
+
   update(){
     let dist = this.loc.distance(game.actor.loc);
-    if(dist < 100){
+    if(dist > 100){
       this.acceleration = JSVector.subGetNew(game.actor.loc, this.loc);
       this.acceleration.normalize();
       this.acceleration.multiply(0.05);
@@ -38,13 +38,7 @@ class Antibody{
       this.velocity.limit(2);
       this.loc.add(this.velocity);
     }else if(dist > 5){
-      this.acceleration.multiply(0);
-      this.acceleration = JSVector.subGetNew(game.actor.loc, this.loc);
-      this.acceleration.normalize();
-      this.acceleration.multiply(0.1);
-      this.velocity.add(this.acceleration);
-      this.velocity.limit(1.5);
-      this.loc.add(this.velocity);
+      return;
     }
   }
 }

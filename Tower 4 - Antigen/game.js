@@ -46,6 +46,14 @@ function Game(){
       game.towers.push(new Tower(game, new JSVector(x,y)));
     });
 
+    this.canvas.addEventListener("keyup", function(event){
+      if(event.keyCode == 13){
+        let x = event.offsetX;
+        let y = event.offsetY;
+        game.towers.push(new Tower(game, new JSVector(x,y)));
+      }
+    });
+
 }//++++++++++++++++++++++  end Game constructor
 
 // function to run the game each animation cycle
