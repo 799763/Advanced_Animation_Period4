@@ -7,12 +7,12 @@ class Antibody{
   }
   run(){
     this.render();
-    //this.update();
-    this.delay();
+    this.update();
+    //this.delay();
   }
 
   delay(){
-    let interv = setInterval(this.update,1000);
+    let interv = setInterval(this.update,5000);
   }
 
   render(){
@@ -30,14 +30,14 @@ class Antibody{
 
   update(){
     let dist = this.loc.distance(game.actor.loc);
-    if(dist > 100){
+    if(dist < 100){
       this.acceleration = JSVector.subGetNew(game.actor.loc, this.loc);
       this.acceleration.normalize();
       this.acceleration.multiply(0.05);
       this.velocity.add(this.acceleration);
       this.velocity.limit(2);
       this.loc.add(this.velocity);
-    }else if(dist > 5){
+    }else if(dist > 20){
       return;
     }
   }

@@ -23,11 +23,13 @@ class Antigen{
   }
 
   update(){
-    for(let i = 0; i < game.towers.length; i++){
         let dist = this.location.distance(game.tower[i].location);
         if(dist > 100){
-            
+            this.acceleration = JSVector.subGetNew(game.actor);
         }
-    }
+  }
+
+  boost(){
+    
   }
 }
