@@ -5,6 +5,7 @@ class Antibody{
     this.acceleration = new JSVector(0,0);
     this.loc = new JSVector(x,y);
     this.hit = false;
+    this.reachedEnemy = false;
   }
   run(){
     this.render();
@@ -32,25 +33,26 @@ class Antibody{
 
   update(){
     let dist = this.loc.distance(game.actor.loc);
-    if(dist < 100 && dist > 500){
+    if(dist < 200){
+      //dist < 100 && dist > 500
       this.acceleration = JSVector.subGetNew(game.actor.loc, this.loc);
       this.acceleration.normalize();
+      //this.acceleration.multiply(0.05);
       this.acceleration.multiply(0.05);
       this.velocity.add(this.acceleration);
       this.velocity.limit(2);
       this.loc.add(this.velocity);
-      console.log("dist > 100 && dist < 500)");
-    }else if(dist > 15){
-      this.acceleration.multiply(0);
+      this.reachedEnemy = false;
+      console.log("In range");
+    }else if(dist < 7){
       this.acceleration = JSVector.subGetNew(game.actor.loc, this.loc);
       this.acceleration.normalize();
-      this.acceleration.multiply(0.1);
+      this.acceleration.multiply(0.7);
       this.velocity.add(this.acceleration);
       this.velocity.limit(1.5);
       this.loc.add(this.velocity);
-      // console.log("dist < 3");
-      // this.hit = true;
-      // return(true);
+      this.reachedEnemy = true;
+      console.log("Reached Enemy");
     }
   }
 }

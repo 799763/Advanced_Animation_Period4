@@ -12,6 +12,16 @@ class Tower{
     for(let i = 0; i < this.antibodies.length; i++){
       this.antibodies[i].run();
     }
+    for(let i = 0; i < this.antibodies.length; i++){
+      if(this.antibodies[i].reachedEnemy = true){
+        console.log("AntiBody loc when spliced:" + this.antibodies[i].loc);
+        console.log("Tower Loc: " + this.location);
+        console.log("Enemy Loc: " + game.actor.loc);
+        this.antibodies.splice(i, 1);
+        console.log("Antibody spliced");
+        console.log("//========");
+      }
+    }
   }
 
   render(){
