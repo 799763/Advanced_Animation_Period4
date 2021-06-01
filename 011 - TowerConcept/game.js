@@ -35,7 +35,9 @@ function Game(){
 
     // Create an actor to follow the path.
     // Additional actors may be created periodically.
-    this.actor = new Actor(this);  // one actor initially
+
+    this.actor = new Actor(this);
+    //this.actor = new Actor(this);  // one actor initially
 
     //Create a Tower
     this.towers = [];

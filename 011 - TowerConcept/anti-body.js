@@ -34,7 +34,6 @@ class Antibody{
   update(){
     let dist = this.loc.distance(game.actor.loc);
     if(dist < 200){
-      //dist < 100 && dist > 500
       this.acceleration = JSVector.subGetNew(game.actor.loc, this.loc);
       this.acceleration.normalize();
       //this.acceleration.multiply(0.05);
@@ -53,6 +52,7 @@ class Antibody{
       this.loc.add(this.velocity);
       this.reachedEnemy = true;
       console.log("Reached Enemy");
+      game.actors.splice(0,1);
     }
   }
 }

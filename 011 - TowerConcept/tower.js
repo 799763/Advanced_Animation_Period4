@@ -12,16 +12,16 @@ class Tower{
     for(let i = 0; i < this.antibodies.length; i++){
       this.antibodies[i].run();
     }
-    for(let i = 0; i < this.antibodies.length; i++){
-      if(this.antibodies[i].reachedEnemy = true){
-        console.log("AntiBody loc when spliced:" + this.antibodies[i].loc);
-        console.log("Tower Loc: " + this.location);
-        console.log("Enemy Loc: " + game.actor.loc);
-        this.antibodies.splice(i, 1);
-        console.log("Antibody spliced");
-        console.log("//========");
-      }
-    }
+     // for(let i = 0; i < this.antibodies.length; i++){
+     //   if(this.antibodies[i].reachedEnemy = true){
+     //     console.log("AntiBody loc when spliced:" + this.antibodies[i].loc);
+     //     console.log("Tower Loc: " + this.location);
+     //     console.log("Enemy Loc: " + game.actor.loc);
+     //     this.antibodies.splice(i, 1);
+     //     console.log("Antibody spliced");
+     //     console.log("//========");
+     //   }
+     // }
   }
 
   render(){
@@ -31,11 +31,17 @@ class Tower{
     ctx.beginPath();
     ctx.save();
     ctx.translate(this.location.x, this.location.y);
-    ctx.rotate(this.vel.getDirection() + Math.PI/2);
-    ctx.moveTo(0,-this.radius);
-    ctx.lineTo(-this.radius/2 , this.radius/3);
-    ctx.lineTo(0,4);
-    ctx.lineTo(this.radius/2, this.radius/3);
+    ctx.rect(0,0,20,5);
+    ctx.rect(0,0,-20,-5);
+    ctx.rotate(90);
+    ctx.rect(0,0,-20,-5);
+    ctx.rotate(90);
+    ctx.rect(0,0,20,5);
+    ctx.rotate(180);
+    ctx.rect(0,0,20,5);
+    ctx.rotate(200);
+    ctx.rect(0,0,20,5);
+
     ctx.closePath();
     ctx.fill();
     ctx.stroke();
